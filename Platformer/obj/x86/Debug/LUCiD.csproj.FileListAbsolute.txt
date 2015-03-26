@@ -14,5 +14,11 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\Windo
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\gray.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\lightgray.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\white.png
+<<<<<<< HEAD
 C:\Users\Jeff\Documents\GitHub\LUCiD_v2\Platformer\obj\x86\Debug\Platformer.exe
 C:\Users\Jeff\Documents\GitHub\LUCiD_v2\Platformer\obj\x86\Debug\Platformer.pdb
+=======
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\large.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\medium.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\small.png
+>>>>>>> origin/master
