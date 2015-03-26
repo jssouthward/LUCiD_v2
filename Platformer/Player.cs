@@ -117,56 +117,49 @@ namespace LUCiD
 
 		private void checkCollisions()
 		{
-            
+            // TODO need to remove this except for dying mechanic
 			if (spriteY >= 400)
 				grounded = true;
 			else
 				grounded = false;
            
 
-            collisions = new List<Rectangle>();
             foreach (Block block in testblocks)
             {
                 Rectangle currBlock = new Rectangle(block.getX(),block.getY(),block.getSpriteWidth(),block.getSpriteHeight());
                 Rectangle playerBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
 
-                Rectangle collision = Rectangle.Intersect(playerBox, currBlock);
-                if (!collision.IsEmpty) 
+                Rectangle rect = Rectangle.Intersect(playerBox, currBlock);
+                if (!rect.IsEmpty && rect.Width > rect.Height && this.spriteY < rect.Y)
                 {
-                    collisions.Add(collision);
-                    Console.WriteLine("collision detected");
+                    grounded = true;
                 }
-            }
-
-            foreach (Rectangle rect in collisions)
-            {
-               // this.y_vel = -1;
-               // grounded = true;
 
                 if (rect.Height > rect.Width && this.spriteX < rect.X)
                 {
                     // side collision with player on the left
                     this.spriteX -= rect.Width;
+                    x_vel = 0;
                 }
-                if (rect.Height > rect.Width && this.spriteX > rect.X)
+                if (rect.Height > rect.Width && this.spriteX+1 > rect.X)
                 {
                     //side collision with player on the right
                     this.spriteX += rect.Width;
+                    x_vel = 0;
+                    //Console.WriteLine("collision");
                 }
                 if (rect.Height < rect.Width && this.spriteY < rect.Y)
                 {
-                    // cieling collision
-                    this.spriteY -= rect.Height;
-                }
-                if (rect.Height < rect.Width && this.spriteY > rect.Y)
-                {
                     // floor collision
-                    this.spriteY += rect.Height;
+                    this.spriteY -= rect.Height;
+                    y_vel = 0;
                 }
-
-                //this.spriteX -= rect.Height -64;
-                //this.spriteY -= rect.Width -64;
-
+                if (rect.Height < rect.Width && this.spriteY+1 > rect.Y)
+                {
+                    // cieling collision
+                    this.spriteY += rect.Height;
+                    y_vel = 0;
+                }
             } 
 		}
 
@@ -175,7 +168,7 @@ namespace LUCiD
 			// Jump on button press
 			if (controls.onPress(Keys.Space, Buttons.A) && grounded)
 			{
-				y_vel = -11;
+				y_vel = -25;
 				jumpPoint = (int)(gameTime.TotalGameTime.TotalMilliseconds);
 				grounded = false;
 			}

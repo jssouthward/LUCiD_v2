@@ -43,7 +43,7 @@ namespace LUCiD
         {
             // TODO: Add your initialization logic here
 
-            player1 = new Player(100, 100, 64, 64);
+            player1 = new Player(100, 100, 32, 64);
             base.Initialize();
 
             Joystick.Init();
