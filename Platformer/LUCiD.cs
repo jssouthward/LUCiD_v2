@@ -23,6 +23,9 @@ namespace LUCiD
         Controls controls;
         string[,] level;
         Dictionary<string, string> key = new Dictionary<string, string>();
+        Texture2D dark;
+        int darkX;
+        int darkY;
 
         public LUCiD()
         {
@@ -121,6 +124,7 @@ namespace LUCiD
             {
                 block.LoadContent(this.Content);
             }
+            dark = Content.Load<Texture2D>("large.png");
             // TODO: use this.Content to load your game content here
         }
 
@@ -152,6 +156,8 @@ namespace LUCiD
             player1.testblocks = blocks;
             player1.Update(controls, gameTime);
 
+            darkX = player1.getX() - 1000;
+            darkY = player1.getY() - 750;
 
            
 
@@ -174,6 +180,7 @@ namespace LUCiD
             {
                 block.Draw(spriteBatch);
             }
+            spriteBatch.Draw(dark, new Rectangle(darkX, darkY, 2000, 1500), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
