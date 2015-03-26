@@ -1,0 +1,16 @@
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Platformer.exe
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Platformer.pdb
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\obj\x86\Debug\LUCiD.csprojResolveAssemblyReference.cache
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\obj\x86\Debug\Platformer.exe
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\obj\x86\Debug\Platformer.pdb
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\wiseman.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Levels\key001.txt
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Levels\level001.txt
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\gray.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\lightgray.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\white.png

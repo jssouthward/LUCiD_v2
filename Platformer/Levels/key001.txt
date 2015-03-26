@@ -1,0 +1,2 @@
+X,gray.png
+O,white.png
