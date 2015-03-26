@@ -142,8 +142,30 @@ namespace LUCiD
             {
                // this.y_vel = -1;
                // grounded = true;
-                this.spriteX -= rect.Height;
-                this.spriteY -= rect.Width;
+
+                if (rect.Height > rect.Width && this.spriteX < rect.X)
+                {
+                    // side collision with player on the left
+                    this.spriteX -= rect.Width;
+                }
+                if (rect.Height > rect.Width && this.spriteX > rect.X)
+                {
+                    //side collision with player on the right
+                    this.spriteX += rect.Width;
+                }
+                if (rect.Height < rect.Width && this.spriteY < rect.Y)
+                {
+                    // cieling collision
+                    this.spriteY -= rect.Height;
+                }
+                if (rect.Height < rect.Width && this.spriteY > rect.Y)
+                {
+                    // floor collision
+                    this.spriteY += rect.Height;
+                }
+
+                //this.spriteX -= rect.Height -64;
+                //this.spriteY -= rect.Width -64;
 
             } 
 		}
