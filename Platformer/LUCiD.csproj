@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Block.cs" />
+    <Compile Include="Warp.cs" />
     <Compile Include="Lucidity.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Controls.cs" />

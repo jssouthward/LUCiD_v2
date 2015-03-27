@@ -26,6 +26,7 @@ namespace LUCiD
         public Lucidity shot;
         private int currDirection = 1;
         public bool fired = false;
+        public int lucidity = 100;
         
         public Player(int x, int y, int width, int height)
         {
@@ -77,12 +78,13 @@ namespace LUCiD
 			Move (controls);
 			Jump (controls, gameTime);
 
-            if (controls.onPress(Keys.X, Buttons.LeftShoulder))
+            if (controls.onPress(Keys.X, Buttons.LeftShoulder) && this.lucidity > 5)
             {
                 shot.setX(this.getX());
                 shot.setY(this.getY());
                 shot.direction = currDirection;
                 shot.spent = false;
+                this.lucidity -= 5;
             }
             
 		}
@@ -188,7 +190,7 @@ namespace LUCiD
 			// Jump on button press
 			if (controls.onPress(Keys.Space, Buttons.A) && grounded)
 			{
-				y_vel = -17;
+				y_vel = -13;
 				jumpPoint = (int)(gameTime.TotalGameTime.TotalMilliseconds);
 				grounded = false;
 			}

@@ -20,12 +20,13 @@ namespace LUCiD
         SpriteBatch spriteBatch;
         Player player1;
         Monster monster1;
+        Warp stageEnd;
         List<Block> blocks;
         List<Monster> monsterList = new List<Monster>();
         Controls controls;
         string[,] level;
         Dictionary<string, string> key = new Dictionary<string, string>();
-        Texture2D dark;
+        Texture2D largeDark, mediumDark, smallDark;
         Texture2D background;
         Lucidity playerShot;
         int darkX;
@@ -51,7 +52,7 @@ namespace LUCiD
         {
             // TODO: Add your initialization logic here
 
-            player1 = new Player(100, 100, 32, 64);
+            player1 = new Player(100, 400, 32, 64);
             monster1 = new Monster(800, 100, 64, 64);
             monsterList.Add(monster1);
             playerShot = new Lucidity(100, 100, 32, 32, 1);
@@ -110,6 +111,10 @@ namespace LUCiD
                         Block temp = new Block(32 * j, 32 * i, 32, 32, "gray.png");
                         blocks.Add(temp);
                     }
+                    if (level[i, j].Equals("W"))
+                    {
+                        stageEnd = new Warp(32 * j, 32 * i, 64, 64);
+                    }
                    
                 }
                 //Console.Write("\n");
@@ -135,7 +140,10 @@ namespace LUCiD
             {
                 block.LoadContent(this.Content);
             }
-            dark = Content.Load<Texture2D>("300x300.png");
+            stageEnd.LoadContent(this.Content);
+            largeDark = Content.Load<Texture2D>("300x300.png");
+            mediumDark = Content.Load<Texture2D>("200x200.png");
+            smallDark = Content.Load<Texture2D>("100x100.png");
             background = Content.Load<Texture2D>("darkwoods.png");
 
             // TODO: use this.Content to load your game content here
@@ -209,7 +217,22 @@ namespace LUCiD
             {
                 block.Draw(spriteBatch);
             }
-            //spriteBatch.Draw(dark, new Rectangle(darkX, darkY, 5000, 5000), Color.White);
+
+            stageEnd.Draw(spriteBatch);
+
+            if (player1.lucidity < 33)
+            {
+                spriteBatch.Draw(smallDark, new Rectangle(darkX, darkY, 5000, 5000), Color.White);
+            }
+            if (player1.lucidity < 67 && player1.lucidity >= 33)
+            {
+                spriteBatch.Draw(mediumDark, new Rectangle(darkX, darkY, 5000, 5000), Color.White);
+            }
+            if (player1.lucidity >= 67)
+            {
+                spriteBatch.Draw(largeDark, new Rectangle(darkX, darkY, 5000, 5000), Color.White);
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
