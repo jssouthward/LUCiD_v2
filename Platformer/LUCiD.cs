@@ -183,8 +183,8 @@ namespace LUCiD
             player1.shot = playerShot;
             player1.shot.Update(controls, gameTime);
 
-            darkX = player1.getX() - 2500;
-            darkY = player1.getY() - 2500;
+            darkX = player1.getX() - 2484; //2500-16 offset for player
+            darkY = player1.getY() - 2468; // 2500-32
 
            
 
