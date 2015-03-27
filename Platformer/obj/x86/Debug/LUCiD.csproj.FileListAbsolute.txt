@@ -14,6 +14,11 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\Windo
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\gray.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\lightgray.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\white.png
-C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\large.png
-C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\medium.png
-C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\small.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\lucid.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\darkwoods.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\100x100.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\200x200.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\300x300.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\dude.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\monster.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\warp.png

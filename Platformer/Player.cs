@@ -23,7 +23,9 @@ namespace LUCiD
 		public int maxFallSpeed = 10;
 		private int jumpPoint = 0;
         public List<Block> testblocks;
-        private List<Rectangle> collisions;
+        public Lucidity shot;
+        private int currDirection = 1;
+        public bool fired = false;
         
         public Player(int x, int y, int width, int height)
         {
@@ -62,7 +64,7 @@ namespace LUCiD
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("wiseman.png");
+            image = content.Load<Texture2D>("dude.png");
         }
 
         public void Draw(SpriteBatch sb)
@@ -74,20 +76,38 @@ namespace LUCiD
 		{
 			Move (controls);
 			Jump (controls, gameTime);
+
+            if (controls.onPress(Keys.X, Buttons.LeftShoulder))
+            {
+                shot.setX(this.getX());
+                shot.setY(this.getY());
+                shot.direction = currDirection;
+                shot.spent = false;
+            }
+            
 		}
 
 		public void Move(Controls controls)
 		{
 
 			// Sideways Acceleration
-			if (controls.onPress(Keys.Right, Buttons.DPadRight))
-				x_accel += speed;
+			if (controls.onPress(Keys.Right, Buttons.DPadRight)) 
+            {
+                x_accel += speed;
+                currDirection = -1;
+            }
+				
 			else if (controls.onRelease(Keys.Right, Buttons.DPadRight))
 				x_accel -= speed;
-			if (controls.onPress(Keys.Left, Buttons.DPadLeft))
-				x_accel -= speed;
-			else if (controls.onRelease(Keys.Left, Buttons.DPadLeft))
-				x_accel += speed;
+
+            if (controls.onPress(Keys.Left, Buttons.DPadLeft))
+            {
+                x_accel -= speed;
+                currDirection = 1;
+            }
+
+            else if (controls.onRelease(Keys.Left, Buttons.DPadLeft))
+                x_accel += speed;
 
 			double playerFriction = pushing ? (friction * 3) : friction;
 			x_vel = x_vel * (1 - playerFriction) + x_accel * .10;
@@ -118,12 +138,12 @@ namespace LUCiD
 		private void checkCollisions()
 		{
             // TODO need to remove this except for dying mechanic
-			if (spriteY >= 400)
+			if (spriteY >= 800)
 				grounded = true;
 			else
 				grounded = false;
            
-
+            // TODO need to handle case where 1x1 corner
             foreach (Block block in testblocks)
             {
                 Rectangle currBlock = new Rectangle(block.getX(),block.getY(),block.getSpriteWidth(),block.getSpriteHeight());
@@ -168,7 +188,7 @@ namespace LUCiD
 			// Jump on button press
 			if (controls.onPress(Keys.Space, Buttons.A) && grounded)
 			{
-				y_vel = -25;
+				y_vel = -17;
 				jumpPoint = (int)(gameTime.TotalGameTime.TotalMilliseconds);
 				grounded = false;
 			}
