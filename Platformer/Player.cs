@@ -23,6 +23,7 @@ namespace LUCiD
 		public int maxFallSpeed = 10;
 		private int jumpPoint = 0;
         public List<Block> testblocks;
+        public List<Powerup> powerTest;
         public Lucidity shot;
         private int currDirection = 1;
         public bool fired = false;
@@ -140,17 +141,31 @@ namespace LUCiD
 		private void checkCollisions()
 		{
             // TODO need to remove this except for dying mechanic
-			if (spriteY >= 800)
+			/*if (spriteY >= 800)
 				grounded = true;
 			else
 				grounded = false;
-           
+             * */
+
+             Rectangle playerBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
+
+            foreach (Powerup power in powerTest)
+            {
+                Rectangle currPower = new Rectangle(power.getX(), power.getY(), power.getSpriteWidth(), power.getSpriteHeight());
+               
+
+                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                 if (!rectPower.IsEmpty && power.collected == false)
+                 {
+                     power.collected = true;
+                     this.lucidity += 20;
+                 }
+            }
+
             // TODO need to handle case where 1x1 corner
             foreach (Block block in testblocks)
             {
                 Rectangle currBlock = new Rectangle(block.getX(),block.getY(),block.getSpriteWidth(),block.getSpriteHeight());
-                Rectangle playerBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
-
                 Rectangle rect = Rectangle.Intersect(playerBox, currBlock);
                 if (!rect.IsEmpty && rect.Width > rect.Height && this.spriteY < rect.Y)
                 {

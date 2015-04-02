@@ -19,11 +19,13 @@ namespace LUCiD
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player1;
-        Monster monster1;
+        Monster monsterTemp; // generic monster used for filling the list
         Warp stageEnd;
         List<Block> blocks;
         List<Monster> monsterList = new List<Monster>();
         List<Monster> temp = new List<Monster>(); //temporary monster list
+        List<Powerup> powerList = new List<Powerup>();
+        Powerup powerTemp;
         Controls controls;
         string[,] level;
         Dictionary<string, string> key = new Dictionary<string, string>();
@@ -53,9 +55,8 @@ namespace LUCiD
         {
             // TODO: Add your initialization logic here
 
-            player1 = new Player(100, 400, 32, 64);
-            monster1 = new Monster(800, 100, 64, 64);
-            monsterList.Add(monster1);
+            
+           
             playerShot = new Lucidity(100, 100, 32, 32, 1);
             playerShot.monsters = monsterList;
             base.Initialize();
@@ -116,7 +117,22 @@ namespace LUCiD
                     {
                         stageEnd = new Warp(32 * j, 32 * i, 64, 64);
                     }
-                   
+                    if (level[i, j].Equals("P"))
+                    {
+                        player1 = new Player(32*j, 32*i, 32, 64);
+                    }
+                    if (level[i, j].Equals("M"))
+                    {
+                        monsterTemp = new Monster(32*j, 32*i, 64, 64);
+                        monsterTemp.LoadContent(this.Content);
+                        monsterList.Add(monsterTemp);
+                    }
+                    if (level[i, j].Equals("U"))
+                    {
+                        powerTemp = new Powerup(32 * j, 32 * i, 32, 32);
+                        powerTemp.LoadContent(this.Content);
+                        powerList.Add(powerTemp);
+                    }
                 }
                 //Console.Write("\n");
             }
@@ -135,7 +151,7 @@ namespace LUCiD
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player1.LoadContent(this.Content);
-            monster1.LoadContent(this.Content);
+            
             playerShot.LoadContent(this.Content);
             foreach (Block block in blocks)
             {
@@ -176,6 +192,7 @@ namespace LUCiD
             //Up, down, left, right affect the coordinates of the sprite
 
             player1.testblocks = blocks;
+            player1.powerTest = powerList;
             player1.Update(controls, gameTime);
 
            
@@ -185,19 +202,19 @@ namespace LUCiD
             darkX = player1.getX() - 2484; //2500-16 offset for player
             darkY = player1.getY() - 2468; // 2500-32
 
-            //TODO put monsters in loaccontent
-            if (monsterList.Count > 0)
-           
-            {
-                foreach (Monster monster in monsterList)
-                {
-                    monster.testblocks = blocks;
-                    monster.Update(controls, gameTime);
-                }
 
-                monsterList.RemoveAll(monster => monster.dead == true);
+            foreach (Monster monster in monsterList)
+            {
+                monster.testblocks = blocks;
+                monster.Update(controls, gameTime);
             }
-             
+            monsterList.RemoveAll(monster => monster.dead == true);
+
+            foreach (Powerup power in powerList)
+            {
+                power.Update(controls, gameTime);
+            }
+            powerList.RemoveAll(powerups => powerups.collected == true);
 
 
             base.Update(gameTime);
@@ -233,6 +250,15 @@ namespace LUCiD
             foreach (Block block in blocks)
             {
                 block.Draw(spriteBatch);
+            }
+
+            foreach (Powerup power in powerList)
+            {
+                if (power.collected == false)
+                {
+                    power.Draw(spriteBatch);
+                }
+              
             }
 
             stageEnd.Draw(spriteBatch);
