@@ -32,6 +32,7 @@ namespace LUCiD
         int darkX;
         int darkY;
 
+        Texture2D texture;
 
         public LUCiD()
         {
@@ -63,7 +64,9 @@ namespace LUCiD
             Console.WriteLine("Number of joysticks: " + Sdl.SDL_NumJoysticks());
             controls = new Controls();
 
-            
+            //health
+            texture = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            texture.SetData<Color>(new Color[] { Color.Red });
 
         }
 
@@ -199,10 +202,10 @@ namespace LUCiD
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(texture, new Rectangle(1, 1, 20, 5), Color.Red);
             player1.Draw(spriteBatch);
             if (monster1.dead == false)
             {
