@@ -23,6 +23,7 @@ namespace LUCiD
         Warp stageEnd;
         List<Block> blocks;
         List<Monster> monsterList = new List<Monster>();
+        List<Monster> temp = new List<Monster>(); //temporary monster list
         Controls controls;
         string[,] level;
         Dictionary<string, string> key = new Dictionary<string, string>();
@@ -177,16 +178,26 @@ namespace LUCiD
             player1.testblocks = blocks;
             player1.Update(controls, gameTime);
 
-            monster1.testblocks = blocks;
-            monster1.Update(controls, gameTime);
-
+           
             player1.shot = playerShot;
             player1.shot.Update(controls, gameTime);
 
             darkX = player1.getX() - 2484; //2500-16 offset for player
             darkY = player1.getY() - 2468; // 2500-32
 
+            //TODO put monsters in loaccontent
+            if (monsterList.Count > 0)
            
+            {
+                foreach (Monster monster in monsterList)
+                {
+                    monster.testblocks = blocks;
+                    monster.Update(controls, gameTime);
+                }
+
+                monsterList.RemoveAll(monster => monster.dead == true);
+            }
+             
 
 
             base.Update(gameTime);
@@ -204,10 +215,16 @@ namespace LUCiD
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             player1.Draw(spriteBatch);
-            if (monster1.dead == false)
+
+            foreach (Monster monster in monsterList)
             {
-                monster1.Draw(spriteBatch);
-            }
+                if (monster.dead == false)
+                {
+                    monster.Draw(spriteBatch);
+                }
+            }   
+   
+           
             if (player1.shot.spent == false)
             {
                 player1.shot.Draw(spriteBatch);

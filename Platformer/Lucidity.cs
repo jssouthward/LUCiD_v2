@@ -104,7 +104,7 @@ namespace LUCiD
                 Rectangle lucidBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
 
                 Rectangle rect = Rectangle.Intersect(lucidBox, currMonster);
-                if (!rect.IsEmpty)
+                if (!rect.IsEmpty && !this.spent)
                 {
                     monster.dead = true;
                     this.spent = true;
