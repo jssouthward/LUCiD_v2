@@ -28,7 +28,7 @@ namespace LUCiD
         private int currDirection = 1;
         public bool fired = false;
         public int lucidity = 100;
-        
+        public int health = 100;
         public Player(int x, int y, int width, int height)
         {
             this.spriteX = x;
