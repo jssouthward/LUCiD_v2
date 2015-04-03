@@ -130,10 +130,10 @@ namespace LUCiD
         private void checkCollisions()
         {
             // TODO need to remove this except for dying mechanic
-            if (spriteY >= 800)
-                grounded = true;
-            else
-                grounded = false;
+            //if (spriteY >= 800)
+            //    grounded = true;
+            //else
+            //    grounded = false;
 
 
             foreach (Block block in testblocks)
@@ -168,7 +168,7 @@ namespace LUCiD
                 }
                 if (rect.Height < rect.Width && this.spriteY + 1 > rect.Y)
                 {
-                    // cieling collision
+                    // ceiling collision
                     this.spriteY += rect.Height;
                     y_vel = 0;
                 }

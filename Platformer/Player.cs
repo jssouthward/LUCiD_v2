@@ -24,11 +24,12 @@ namespace LUCiD
 		private int jumpPoint = 0;
         public List<Block> testblocks;
         public List<Powerup> powerTest;
+        public List<Monster> monsterTest;
         public Lucidity shot;
         private int currDirection = 1;
         public bool fired = false;
         public int lucidity = 100;
-        
+        public int health = 100;
         public Player(int x, int y, int width, int height)
         {
             this.spriteX = x;
@@ -162,40 +163,90 @@ namespace LUCiD
                  }
             }
 
+            foreach (Monster monster in monsterTest)
+            {
+                Rectangle currPower = new Rectangle(monster.getX(), monster.getY(), monster.getSpriteWidth(), monster.getSpriteHeight());
+
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty && monster.dead == false)
+                {
+                    this.health -= 1;
+                }
+            }
+
             // TODO need to handle case where 1x1 corner
             foreach (Block block in testblocks)
             {
                 Rectangle currBlock = new Rectangle(block.getX(),block.getY(),block.getSpriteWidth(),block.getSpriteHeight());
                 Rectangle rect = Rectangle.Intersect(playerBox, currBlock);
-                if (!rect.IsEmpty && rect.Width > rect.Height && this.spriteY < rect.Y)
-                {
-                    grounded = true;
-                }
+                //if (!rect.IsEmpty && rect.Width > rect.Height && this.spriteY < rect.Y)
+                //{
+                //    grounded = true;
+                //}
 
-                if (rect.Height > rect.Width && this.spriteX < rect.X)
+                if (!rect.IsEmpty)
                 {
-                    // side collision with player on the left
-                    this.spriteX -= rect.Width;
-                    x_vel = 0;
-                }
-                if (rect.Height > rect.Width && this.spriteX+1 > rect.X)
-                {
-                    //side collision with player on the right
-                    this.spriteX += rect.Width;
-                    x_vel = 0;
-                    //Console.WriteLine("collision");
-                }
-                if (rect.Height < rect.Width && this.spriteY < rect.Y)
-                {
-                    // floor collision
-                    this.spriteY -= rect.Height;
-                    y_vel = 0;
-                }
-                if (rect.Height < rect.Width && this.spriteY+1 > rect.Y)
-                {
-                    // cieling collision
-                    this.spriteY += rect.Height;
-                    y_vel = 0;
+                    if (rect.Height > rect.Width && this.spriteX < rect.X)
+                    {
+                        // side collision with player on the left
+                        this.spriteX -= rect.Width - 1;
+                        x_vel = 0;
+                    }
+                    if (rect.Height > rect.Width && this.spriteX + 1 > rect.X)
+                    {
+                        //side collision with player on the right
+                        this.spriteX += rect.Width + 1;
+                        x_vel = 0;
+                        //Console.WriteLine("collision");
+                    }
+                    if (rect.Height < rect.Width && this.spriteY < rect.Y)
+                    {
+                        // floor collision
+                        this.spriteY -= rect.Height - 1;
+                        y_vel = 0;
+                        grounded = true;
+                    }
+                    if (rect.Height < rect.Width && this.spriteY + 1 > rect.Y)
+                    {
+                        // ceiling collision
+                        this.spriteY += rect.Height + 1;
+                        y_vel = 0;
+                    }
+
+                    ////Literal Corner Cases
+                    //if (rect.Height == rect.Width && this.spriteX < currBlock.X && this.spriteY < currBlock.Y)
+                    //{
+                    //    // floor block, bottom right corner
+                    //    this.spriteX += rect.Width;
+                    //    this.spriteY -= rect.Width;
+                    //    // y_vel = 0;
+                    //    grounded = true;
+                    //}
+                    //if (rect.Height == rect.Width && this.spriteX > currBlock.X && this.spriteY < currBlock.Y)
+                    //{
+                    //    //floor block, bottom left corner
+                    //    this.spriteX += rect.Width;
+                    //    this.spriteY -= rect.Width;
+                    //    // y_vel = 0;
+                    //    grounded = true;
+                    //    //Console.WriteLine("collision");
+                    //}
+
+                    //if (rect.Height == rect.Width && this.spriteX > currBlock.X && this.spriteY > currBlock.Y)
+                    //{
+                    //    // top left corner
+                    //    this.spriteY -= rect.Height;
+                    //    this.spriteX += rect.Width;
+                    //    //y_vel = 0;
+                    //}
+                    //if (rect.Height == rect.Width && this.spriteX < currBlock.X && this.spriteY > currBlock.Y)
+                    //{
+                    //    // top right corner
+                    //    this.spriteY += rect.Height;
+                    //    this.spriteX += rect.Width;
+                    //    //y_vel = 0;
+                    //}
                 }
             } 
 		}

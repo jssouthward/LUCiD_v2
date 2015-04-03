@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.GamerServices;
+using System.Threading;
 using Tao.Sdl;
 #endregion
 
@@ -35,6 +37,32 @@ namespace LUCiD
         int darkX;
         int darkY;
 
+        //health bar
+        Texture2D healthTexture;
+        Rectangle healthRectangle;
+
+        //lucidity bar
+        Texture2D lucidityTexture;
+        Rectangle lucidityRectangle;
+        Texture2D bar;
+
+        //*** Menu shit start ***//
+        private Texture2D title, startButton, exitButton, resumeButton, loadingScreen;
+        private Vector2 startButtonPosition, exitButtonPosition, resumeButtonPosition;
+        private Thread backgroundThread;
+        private bool isLoading = false;
+        MouseState mouseState;
+        MouseState previousMouseState;
+        GameState gameState;
+
+        enum GameState
+        {
+            StartMenu,
+            Loading,
+            Playing,
+            Paused
+        }
+        //*** Menu shit end ***//
 
         public LUCiD()
         {
@@ -55,7 +83,21 @@ namespace LUCiD
         {
             // TODO: Add your initialization logic here
 
-            
+            //*** Menu shit start ***//
+            //enable the mousepointer
+            IsMouseVisible = true;
+
+            //set the position of the buttons
+            startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 50, 400);
+            exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 50, 450);
+
+            //set the gamestate to start menu
+            gameState = GameState.StartMenu;
+
+            //get the mouse state
+            mouseState = Mouse.GetState();
+            previousMouseState = mouseState;
+            //*** Menu shit end ***//
            
             playerShot = new Lucidity(100, 100, 32, 32, 1);
             playerShot.monsters = monsterList;
@@ -64,9 +106,6 @@ namespace LUCiD
             Joystick.Init();
             Console.WriteLine("Number of joysticks: " + Sdl.SDL_NumJoysticks());
             controls = new Controls();
-
-            
-
         }
 
         /// <summary>
@@ -75,7 +114,6 @@ namespace LUCiD
         /// </summary>
         protected override void LoadContent()
         {
-
             //Read in the level
             string[] lines = System.IO.File.ReadAllLines("Levels/level001.txt");
             string[] keylines = System.IO.File.ReadAllLines("Levels/key001.txt");
@@ -89,7 +127,6 @@ namespace LUCiD
 
             foreach (string line in lines)
             {
-
                 string[] split = line.Split(new Char[] { ' ' });
 
                 for (int i = 0; i < split.Length; i++)
@@ -100,14 +137,13 @@ namespace LUCiD
                     }
                 }
                 levelindex++;
-
             }
 
             for (int i = 0; i < numRows; i++)
             {
                 for (int j = 0; j < realnumCols; j++)
                 {
-                    if(level[i,j].Equals("X"))
+                    if (level[i,j].Equals("X"))
                     {
                         //Console.Write(level[i, j] + ",");
                         Block temp = new Block(32 * j, 32 * i, 32, 32, "gray.png");
@@ -137,16 +173,13 @@ namespace LUCiD
                 //Console.Write("\n");
             }
 
-
             foreach (string keyline in keylines)
             {
-
                 string[] split = keyline.Split(new Char[] { ',' });
                 key.Add(split[0], split[1]);
 
                 Console.WriteLine("\t" + split[0] + ": " + key[split[0]]);
             }
-
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -162,6 +195,19 @@ namespace LUCiD
             mediumDark = Content.Load<Texture2D>("200x200.png");
             smallDark = Content.Load<Texture2D>("100x100.png");
             background = Content.Load<Texture2D>("darkwoods.png");
+            healthTexture = Content.Load<Texture2D>("health.png");
+            lucidityTexture = Content.Load<Texture2D>("lucidity.png");
+            bar = Content.Load<Texture2D>("bar.png");
+
+            //*** Menu shit start ***//
+            //load the buttonimages into the content pipeline
+            title = Content.Load<Texture2D>(@"title");
+            startButton = Content.Load<Texture2D>(@"start");
+            exitButton = Content.Load<Texture2D>(@"exit");
+
+            //load the loading screen
+            loadingScreen = Content.Load<Texture2D>(@"loading");
+            //*** Menu shit end ***//
 
             // TODO: use this.Content to load your game content here
         }
@@ -182,19 +228,64 @@ namespace LUCiD
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+            //*** Menu shit start ***//
+            // Allows the game to exit
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            {
+                this.Exit();
+            }
+                
+            //load the game when needed
+            //isLoading bool is to prevent the LoadGame method from being called 60 times a seconds
+            if (gameState == GameState.Loading && !isLoading)
+            {
+                //set backgroundthread
+                backgroundThread = new Thread(LoadGame);
+                isLoading = true;
+
+                //start backgroundthread
+                backgroundThread.Start();
+            }
+            //wait for mouseclick
+            mouseState = Mouse.GetState();
+            if (previousMouseState.LeftButton == ButtonState.Pressed && mouseState.LeftButton == ButtonState.Released)
+            {
+                MouseClicked(mouseState.X, mouseState.Y);
+            }
+
+            previousMouseState = mouseState;
+
+            if (gameState == GameState.Playing && isLoading)
+            {
+                LoadGame();
+                isLoading = false;
+            }
+            //*** Menu shit end ***//
+
             //set our keyboardstate tracker update can change the gamestate on every cycle
             controls.Update();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
+            }
+
+            //check the pausebutton
+            if (gameState == GameState.Playing)
+            {
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.P))
+                {
+                    gameState = GameState.Paused;
+                }
+            }
 
             // TODO: Add your update logic here
             //Up, down, left, right affect the coordinates of the sprite
-
             player1.testblocks = blocks;
             player1.powerTest = powerList;
+            player1.monsterTest = monsterList;
             player1.Update(controls, gameTime);
-
            
             player1.shot = playerShot;
             player1.shot.Update(controls, gameTime);
@@ -202,20 +293,26 @@ namespace LUCiD
             darkX = player1.getX() - 2484; //2500-16 offset for player
             darkY = player1.getY() - 2468; // 2500-32
 
+            healthRectangle = new Rectangle(20, 20, player1.health, 20);
+            lucidityRectangle = new Rectangle(140, 20, player1.lucidity, 20);
+            //insert here the player losing health update
+            //if monster.intersect(player1)   player.health -= 10
 
-            foreach (Monster monster in monsterList)
+            if (gameState == GameState.Playing) //Pause monsters if not playing
             {
-                monster.testblocks = blocks;
-                monster.Update(controls, gameTime);
+                foreach (Monster monster in monsterList)
+                {
+                    monster.testblocks = blocks;
+                    monster.Update(controls, gameTime);
+                }
+                monsterList.RemoveAll(monster => monster.dead == true);
             }
-            monsterList.RemoveAll(monster => monster.dead == true);
 
             foreach (Powerup power in powerList)
             {
                 power.Update(controls, gameTime);
             }
             powerList.RemoveAll(powerups => powerups.collected == true);
-
 
             base.Update(gameTime);
         }
@@ -230,6 +327,26 @@ namespace LUCiD
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
+            //*** Menu shit start ***/
+            //draw the start menu
+        if (gameState == GameState.StartMenu)
+        {
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(title, new Rectangle(490, 180, 280, 120), Color.White);
+            spriteBatch.Draw(startButton, startButtonPosition, Color.White);
+            spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
+        }
+
+        //show the loading screen when needed
+        if (gameState == GameState.Loading)
+        {
+           spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+           spriteBatch.Draw(loadingScreen, new Vector2((GraphicsDevice.Viewport.Width / 2) - (loadingScreen.Width / 2), (GraphicsDevice.Viewport.Height / 2) - (loadingScreen.Height / 2)), Color.White);
+        }
+        //draw the the game when playing
+        if (gameState == GameState.Playing) //Draw game if playing
+        {
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             player1.Draw(spriteBatch);
 
@@ -239,14 +356,13 @@ namespace LUCiD
                 {
                     monster.Draw(spriteBatch);
                 }
-            }   
-   
-           
+            }
+
             if (player1.shot.spent == false)
             {
                 player1.shot.Draw(spriteBatch);
             }
-            
+
             foreach (Block block in blocks)
             {
                 block.Draw(spriteBatch);
@@ -258,7 +374,6 @@ namespace LUCiD
                 {
                     power.Draw(spriteBatch);
                 }
-              
             }
 
             stageEnd.Draw(spriteBatch);
@@ -276,11 +391,71 @@ namespace LUCiD
                 spriteBatch.Draw(largeDark, new Rectangle(darkX, darkY, 5000, 5000), Color.White);
             }
 
+            spriteBatch.Draw(bar, new Rectangle(140, 20, 100, 20), Color.White);
+            spriteBatch.Draw(bar, new Rectangle(20, 20, 100, 20), Color.White);
+            spriteBatch.Draw(healthTexture, healthRectangle, Color.White);
+            spriteBatch.Draw(lucidityTexture, lucidityRectangle, Color.White);
+        }
+
+        //draw the pause screen
+        if (gameState == GameState.Paused)
+        {
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(resumeButton, resumeButtonPosition, Color.White);
+        }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
-    }
 
+        void LoadGame()
+        {
+            //load the game images into the content pipeline
+            resumeButton = Content.Load<Texture2D>(@"resume");
+            resumeButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - (resumeButton.Width / 2), (GraphicsDevice.Viewport.Height / 2) - (resumeButton.Height / 2));
+
+            //since this will go to fast for this demo's purpose, wait for 3 seconds
+            Thread.Sleep(3000);
+
+            //start playing
+            gameState = GameState.Playing;
+            isLoading = false;
+        }
+
+        void MouseClicked(int x, int y)
+        {
+            //creates a rectangle of 10x10 around the place where the mouse was clicked
+            Rectangle mouseClickRect = new Rectangle(x, y, 10, 10);
+
+            //check the startmenu
+            if (gameState == GameState.StartMenu)
+            {
+                Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X, (int)startButtonPosition.Y, 100, 20);
+                Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X, (int)exitButtonPosition.Y, 100, 20);
+
+                if (mouseClickRect.Intersects(startButtonRect)) //player clicked start button
+                {
+                    gameState = GameState.Loading;
+                    isLoading = false;
+                }
+                else if (mouseClickRect.Intersects(exitButtonRect)) //player clicked exit button
+                {
+                    Exit();
+                }
+            }
+
+            //check the resumebutton
+            if (gameState == GameState.Paused)
+            {
+                Rectangle resumeButtonRect = new Rectangle((int)resumeButtonPosition.X, (int)resumeButtonPosition.Y, 100, 20);
+
+                if (mouseClickRect.Intersects(resumeButtonRect))
+                {
+                    gameState = GameState.Playing;
+                }
+            }
+        }
+    }
 }
 
