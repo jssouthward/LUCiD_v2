@@ -171,7 +171,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && monster.dead == false)
                 {
-                    this.health -= 5;
+                    this.health -= 3;
                 }
             }
 
@@ -188,13 +188,13 @@ namespace LUCiD
                 if (rect.Height > rect.Width && this.spriteX < rect.X)
                 {
                     // side collision with player on the left
-                    this.spriteX -= rect.Width -1;
+                    this.spriteX -= rect.Width;
                     x_vel = 0;
                 }
                 if (rect.Height > rect.Width && this.spriteX+1 > rect.X)
                 {
                     //side collision with player on the right
-                    this.spriteX += rect.Width +1;
+                    this.spriteX += rect.Width;
                     x_vel = 0;
                     //Console.WriteLine("collision");
                 }
