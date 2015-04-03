@@ -64,3 +64,10 @@ C:\Users\ydc5yf.CSLAB\Desktop\LUCiD_v2-master\Platformer\bin\WindowsGL\Debug\Con
 C:\Users\ydc5yf.CSLAB\Desktop\LUCiD_v2-master\Platformer\bin\WindowsGL\Debug\Content\title.png
 C:\Users\Jeff\Desktop\LUCiD_v2-master\Platformer\obj\x86\Debug\Platformer.exe
 C:\Users\Jeff\Desktop\LUCiD_v2-master\Platformer\obj\x86\Debug\Platformer.pdb
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\exit.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\health.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\loading.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\lucidity.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\resume.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\start.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\title.png

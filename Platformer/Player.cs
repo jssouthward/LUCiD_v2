@@ -24,6 +24,7 @@ namespace LUCiD
 		private int jumpPoint = 0;
         public List<Block> testblocks;
         public List<Powerup> powerTest;
+        public List<Monster> monsterTest;
         public Lucidity shot;
         private int currDirection = 1;
         public bool fired = false;
@@ -162,6 +163,18 @@ namespace LUCiD
                  }
             }
 
+            foreach (Monster monster in monsterTest)
+            {
+                Rectangle currPower = new Rectangle(monster.getX(), monster.getY(), monster.getSpriteWidth(), monster.getSpriteHeight());
+
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty && monster.dead == false)
+                {
+                    this.health -= 5;
+                }
+            }
+
             // TODO need to handle case where 1x1 corner
             foreach (Block block in testblocks)
             {
@@ -175,26 +188,26 @@ namespace LUCiD
                 if (rect.Height > rect.Width && this.spriteX < rect.X)
                 {
                     // side collision with player on the left
-                    this.spriteX -= rect.Width;
+                    this.spriteX -= rect.Width -1;
                     x_vel = 0;
                 }
                 if (rect.Height > rect.Width && this.spriteX+1 > rect.X)
                 {
                     //side collision with player on the right
-                    this.spriteX += rect.Width;
+                    this.spriteX += rect.Width +1;
                     x_vel = 0;
                     //Console.WriteLine("collision");
                 }
                 if (rect.Height < rect.Width && this.spriteY < rect.Y)
                 {
                     // floor collision
-                    this.spriteY -= rect.Height;
+                    this.spriteY -= rect.Height -1;
                     y_vel = 0;
                 }
                 if (rect.Height < rect.Width && this.spriteY+1 > rect.Y)
                 {
                     // cieling collision
-                    this.spriteY += rect.Height;
+                    this.spriteY += rect.Height +1;
                     y_vel = 0;
                 }
             } 

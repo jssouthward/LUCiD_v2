@@ -130,11 +130,11 @@ namespace LUCiD
         private void checkCollisions()
         {
             // TODO need to remove this except for dying mechanic
-            if (spriteY >= 800)
+            /*if (spriteY >= 800)
                 grounded = true;
             else
                 grounded = false;
-
+            */
 
             foreach (Block block in testblocks)
             {

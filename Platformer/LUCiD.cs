@@ -282,6 +282,7 @@ namespace LUCiD
             //Up, down, left, right affect the coordinates of the sprite
             player1.testblocks = blocks;
             player1.powerTest = powerList;
+            player1.monsterTest = monsterList;
             player1.Update(controls, gameTime);
            
             player1.shot = playerShot;
@@ -291,7 +292,7 @@ namespace LUCiD
             darkY = player1.getY() - 2468; // 2500-32
 
             healthRectangle = new Rectangle(20, 20, player1.health, 20);
-            lucidityRectangle = new Rectangle(140, 20, player1.health, 20);
+            lucidityRectangle = new Rectangle(140, 20, player1.lucidity, 20);
             //insert here the player losing health update
             //if monster.intersect(player1)   player.health -= 10
 
@@ -411,7 +412,7 @@ namespace LUCiD
             resumeButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - (resumeButton.Width / 2), (GraphicsDevice.Viewport.Height / 2) - (resumeButton.Height / 2));
 
             //since this will go to fast for this demo's purpose, wait for 3 seconds
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
 
             //start playing
             gameState = GameState.Playing;
