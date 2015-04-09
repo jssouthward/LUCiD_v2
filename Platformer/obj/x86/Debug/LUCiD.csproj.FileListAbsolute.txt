@@ -71,3 +71,5 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\Windo
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\resume.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\start.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\title.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\DST-Arch-Delerium.wma
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\DST-Arch-Delerium_wav.wav

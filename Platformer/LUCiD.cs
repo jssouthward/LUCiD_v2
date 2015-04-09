@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using System.Threading;
 using Tao.Sdl;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 #endregion
 
 namespace LUCiD
@@ -206,6 +208,16 @@ namespace LUCiD
             //load the loading screen
             loadingScreen = Content.Load<Texture2D>(@"loading");
             //*** Menu shit end ***//
+
+            // This block should play the song on repeat, but it seems to not work
+            // with the file format. I think it has to do with the content pipeline, but
+            // I can't get that to work on my computer. See the content pipeline tutorial on
+            // piazza for more information.
+            /*
+            Song song = Content.Load<Song>("DST-Arch-Delerium_wav.wav");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+             */
 
             // TODO: use this.Content to load your game content here
         }
