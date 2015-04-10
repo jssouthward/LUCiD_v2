@@ -38,6 +38,8 @@ namespace LUCiD
         Dictionary<string, string> key = new Dictionary<string, string>();
         Texture2D largeDark, mediumDark, smallDark;
         Texture2D background;
+        Vector2 backgroundPosition;
+        Camera camera;
         int darkX;
         int darkY;
 
@@ -109,6 +111,8 @@ namespace LUCiD
             Joystick.Init();
             Console.WriteLine("Number of joysticks: " + Sdl.SDL_NumJoysticks());
             controls = new Controls();
+
+            camera = new Camera(GraphicsDevice.Viewport);
         }
 
         /// <summary>
@@ -214,6 +218,8 @@ namespace LUCiD
             startButton = Content.Load<Texture2D>(@"start");
             exitButton = Content.Load<Texture2D>(@"exit");
 
+            deathScreen = Content.Load<Texture2D>(@"youdied");
+
             //load the loading screen
             loadingScreen = Content.Load<Texture2D>(@"loading");
             //*** Menu shit end ***//
@@ -311,8 +317,8 @@ namespace LUCiD
             darkX = player1.getX() - 2484; //2500-16 offset for player
             darkY = player1.getY() - 2468; // 2500-32
 
-            healthRectangle = new Rectangle(20, 20, player1.health, 20);
-            lucidityRectangle = new Rectangle(140, 20, player1.lucidity, 20);
+            healthRectangle = new Rectangle(player1.getX() - 240, player1.getY()-320, (int)(player1.health), 20);
+            lucidityRectangle = new Rectangle(player1.getX() - 100, player1.getY()-320, player1.lucidity, 20);
             //insert here the player losing health update
             //if monster.intersect(player1)   player.health -= 10
 
@@ -353,7 +359,8 @@ namespace LUCiD
                 power.Update(controls, gameTime);
             }
             powerList.RemoveAll(powerups => powerups.collected == true);
-
+            if(gameState == GameState.Playing) 
+                camera.Update(gameTime, player1);
             base.Update(gameTime);
         }
 
@@ -366,8 +373,10 @@ namespace LUCiD
             GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-
+            if (gameState == GameState.Playing)
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
+            else
+                spriteBatch.Begin();
             //*** Menu shit start ***/
             //draw the start menu
         if (gameState == GameState.StartMenu)
@@ -385,7 +394,7 @@ namespace LUCiD
             spriteBatch.Draw(startButton, startButtonPosition, Color.White);
             spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
         }
-
+           
         //show the loading screen when needed
         if (gameState == GameState.Loading)
         {
@@ -402,7 +411,7 @@ namespace LUCiD
         //draw the the game when playing
         if (gameState == GameState.Playing) //Draw game if playing
         {
-            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(background, new Rectangle(-300, -300, 3000, 1800), Color.White);
             player1.Draw(spriteBatch);
 
             if (player1.endOfLevel == true)

@@ -30,7 +30,7 @@ namespace LUCiD
         public int currDirection = 1;
         public bool fired = false;
         public int lucidity = 100;
-        public int health = 100;
+        public double health = 100;
         public bool endOfLevel = false;
 
         public Player(int x, int y, int width, int height)
@@ -177,7 +177,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && monster.dead == false)
                 {
-                    this.health -= 3;
+                    this.health -= 0.3;
                 }
             }
 
