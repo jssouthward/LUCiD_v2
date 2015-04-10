@@ -29,7 +29,9 @@ namespace LUCiD
         List<Monster> monsterList = new List<Monster>();
         List<Monster> temp = new List<Monster>(); //temporary monster list
         List<Powerup> powerList = new List<Powerup>();
+        List<Warp> warpList = new List<Warp>();
         Powerup powerTemp;
+        Warp warpTemp;
         Controls controls;
         string[,] level;
         Dictionary<string, string> key = new Dictionary<string, string>();
@@ -61,7 +63,8 @@ namespace LUCiD
             StartMenu,
             Loading,
             Playing,
-            Paused
+            Paused,
+            Win
         }
         //*** Menu shit end ***//
 
@@ -152,7 +155,9 @@ namespace LUCiD
                     }
                     if (level[i, j].Equals("W"))
                     {
-                        stageEnd = new Warp(32 * j, 32 * i, 64, 64);
+                        warpTemp = new Warp(32 * j, 32 * i, 64, 64);
+                        warpTemp.LoadContent(this.Content);
+                        warpList.Add(warpTemp);
                     }
                     if (level[i, j].Equals("P"))
                     {
@@ -191,7 +196,7 @@ namespace LUCiD
             {
                 block.LoadContent(this.Content);
             }
-            stageEnd.LoadContent(this.Content);
+
             largeDark = Content.Load<Texture2D>("300x300.png");
             mediumDark = Content.Load<Texture2D>("200x200.png");
             smallDark = Content.Load<Texture2D>("100x100.png");
@@ -295,6 +300,7 @@ namespace LUCiD
             player1.testblocks = blocks;
             player1.powerTest = powerList;
             player1.monsterTest = monsterList;
+            player1.warpTest = warpList;
             player1.Update(controls, gameTime);
            
             player1.shot = playerShot;
@@ -354,11 +360,23 @@ namespace LUCiD
            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
            spriteBatch.Draw(loadingScreen, new Vector2((GraphicsDevice.Viewport.Width / 2) - (loadingScreen.Width / 2), (GraphicsDevice.Viewport.Height / 2) - (loadingScreen.Height / 2)), Color.White);
         }
+
+        if (gameState == GameState.Win)
+        {
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(title, new Rectangle(490, 180, 280, 120), Color.White);
+        }
+        
         //draw the the game when playing
         if (gameState == GameState.Playing) //Draw game if playing
         {
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             player1.Draw(spriteBatch);
+
+            if (player1.endOfLevel == true)
+            {
+                gameState = GameState.Win;
+            }
 
             foreach (Monster monster in monsterList)
             {
@@ -386,7 +404,10 @@ namespace LUCiD
                 }
             }
 
-            stageEnd.Draw(spriteBatch);
+            foreach (Warp warp in warpList)
+            {
+                warp.Draw(spriteBatch);
+            }
 
             if (player1.lucidity < 33)
             {

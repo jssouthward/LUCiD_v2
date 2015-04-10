@@ -25,11 +25,14 @@ namespace LUCiD
         public List<Block> testblocks;
         public List<Powerup> powerTest;
         public List<Monster> monsterTest;
+        public List<Warp> warpTest;
         public Lucidity shot;
         private int currDirection = 1;
         public bool fired = false;
         public int lucidity = 100;
         public int health = 100;
+        public bool endOfLevel = false;
+
         public Player(int x, int y, int width, int height)
         {
             this.spriteX = x;
@@ -161,6 +164,18 @@ namespace LUCiD
                      power.collected = true;
                      this.lucidity += 20;
                  }
+            }
+
+            foreach (Warp warp in warpTest)
+            {
+                Rectangle currPower = new Rectangle(warp.getX(), warp.getY(), warp.getSpriteWidth(), warp.getSpriteHeight());
+
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty && this.spriteX == warp.getX()) //player is actually touching the base of the warp
+                {
+                    this.endOfLevel = true;
+                }
             }
 
             foreach (Monster monster in monsterTest)
