@@ -50,7 +50,7 @@ namespace LUCiD
         Rectangle lucidityRectangle;
 
         //*** Menu shit start ***//
-        private Texture2D title, startButton, exitButton, resumeButton, loadingScreen;
+        private Texture2D title, startButton, exitButton, resumeButton, loadingScreen, deathScreen;
         private Vector2 startButtonPosition, exitButtonPosition, resumeButtonPosition;
         private Thread backgroundThread;
         private bool isLoading = false;
@@ -64,7 +64,8 @@ namespace LUCiD
             Loading,
             Playing,
             Paused,
-            Win
+            Win,
+            Dead
         }
         //*** Menu shit end ***//
 
@@ -315,6 +316,11 @@ namespace LUCiD
             //insert here the player losing health update
             //if monster.intersect(player1)   player.health -= 10
 
+            if (player1.health <= 0)
+            {
+                gameState = GameState.Dead;
+            }
+
             if (gameState == GameState.Playing) //Pause monsters if not playing
             {
 
@@ -368,6 +374,14 @@ namespace LUCiD
         {
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             spriteBatch.Draw(title, new Rectangle(490, 180, 280, 120), Color.White);
+            spriteBatch.Draw(startButton, startButtonPosition, Color.White);
+            spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
+        }
+
+        if (gameState == GameState.Dead)
+        {
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(deathScreen, new Rectangle(440, 180, 380, 100), Color.White);
             spriteBatch.Draw(startButton, startButtonPosition, Color.White);
             spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
         }
@@ -486,6 +500,22 @@ namespace LUCiD
                 Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X, (int)exitButtonPosition.Y, 100, 20);
 
                 if (mouseClickRect.Intersects(startButtonRect)) //player clicked start button
+                {
+                    gameState = GameState.Loading;
+                    isLoading = false;
+                }
+                else if (mouseClickRect.Intersects(exitButtonRect)) //player clicked exit button
+                {
+                    Exit();
+                }
+            }
+
+            if (gameState == GameState.Dead)
+            {
+                Rectangle restartButtonRect = new Rectangle((int)startButtonPosition.X, (int)startButtonPosition.Y, 100, 20);
+                Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X, (int)exitButtonPosition.Y, 100, 20);
+
+                if (mouseClickRect.Intersects(restartButtonRect)) //Not working part. Rectangle seems to not be drawn
                 {
                     gameState = GameState.Loading;
                     isLoading = false;
