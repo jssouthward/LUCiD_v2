@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace LUCiD
 {
-	class Player : Sprite
+	class Player : Sprite 
     {
 		private bool moving;
 		private bool grounded;
@@ -26,8 +26,8 @@ namespace LUCiD
         public List<Powerup> powerTest;
         public List<Monster> monsterTest;
         public List<Warp> warpTest;
-        public Lucidity shot;
-        private int currDirection = 1;
+        public List<Lucidity> shotTest = new List<Lucidity>();
+        public int currDirection = 1;
         public bool fired = false;
         public int lucidity = 100;
         public int health = 100;
@@ -82,15 +82,6 @@ namespace LUCiD
 		{
 			Move (controls);
 			Jump (controls, gameTime);
-
-            if (controls.onPress(Keys.X, Buttons.LeftShoulder) && this.lucidity > 5)
-            {
-                shot.setX(this.getX());
-                shot.setY(this.getY());
-                shot.direction = currDirection;
-                shot.spent = false;
-                this.lucidity -= 5;
-            }
             
 		}
 

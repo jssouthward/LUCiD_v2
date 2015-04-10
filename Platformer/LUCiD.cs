@@ -29,6 +29,7 @@ namespace LUCiD
         List<Monster> monsterList = new List<Monster>();
         List<Monster> temp = new List<Monster>(); //temporary monster list
         List<Powerup> powerList = new List<Powerup>();
+        List<Lucidity> shotList = new List<Lucidity>();
         List<Warp> warpList = new List<Warp>();
         Powerup powerTemp;
         Warp warpTemp;
@@ -37,7 +38,6 @@ namespace LUCiD
         Dictionary<string, string> key = new Dictionary<string, string>();
         Texture2D largeDark, mediumDark, smallDark;
         Texture2D background;
-        Lucidity playerShot;
         int darkX;
         int darkY;
 
@@ -102,9 +102,7 @@ namespace LUCiD
             mouseState = Mouse.GetState();
             previousMouseState = mouseState;
             //*** Menu shit end ***//
-           
-            playerShot = new Lucidity(100, 100, 32, 32, 1);
-            playerShot.monsters = monsterList;
+
             base.Initialize();
 
             Joystick.Init();
@@ -191,10 +189,15 @@ namespace LUCiD
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player1.LoadContent(this.Content);
             
-            playerShot.LoadContent(this.Content);
+
             foreach (Block block in blocks)
             {
                 block.LoadContent(this.Content);
+            }
+
+            foreach (Lucidity lucid in player1.shotTest)
+            {
+                lucid.LoadContent(this.Content);
             }
 
             largeDark = Content.Load<Texture2D>("300x300.png");
@@ -303,8 +306,6 @@ namespace LUCiD
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
            
-            player1.shot = playerShot;
-            player1.shot.Update(controls, gameTime);
 
             darkX = player1.getX() - 2484; //2500-16 offset for player
             darkY = player1.getY() - 2468; // 2500-32
@@ -316,6 +317,23 @@ namespace LUCiD
 
             if (gameState == GameState.Playing) //Pause monsters if not playing
             {
+
+                if (controls.onPress(Keys.X, Buttons.LeftShoulder) && player1.lucidity > 5)
+                {
+                    Lucidity shotTemp = new Lucidity(player1.getX(), player1.getY(), 32, 32, player1.currDirection);
+                    shotTemp.LoadContent(this.Content);
+                    this.shotList.Add(shotTemp);
+                    player1.lucidity -= 5;
+                }
+
+
+                foreach (Lucidity lucid in shotList)
+                {
+                    lucid.monsters = this.monsterList;
+                    lucid.Update(controls, gameTime);
+                }
+                shotList.RemoveAll(lucid => lucid.spent == true);
+
                 foreach (Monster monster in monsterList)
                 {
                     monster.testblocks = blocks;
@@ -386,10 +404,14 @@ namespace LUCiD
                 }
             }
 
-            if (player1.shot.spent == false)
+            foreach (Lucidity shot in shotList)
             {
-                player1.shot.Draw(spriteBatch);
+                if (shot.spent == false)
+                {
+                    shot.Draw(spriteBatch);
+                }
             }
+            
 
             foreach (Block block in blocks)
             {
