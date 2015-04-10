@@ -73,3 +73,36 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\Windo
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\title.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\DST-Arch-Delerium.wma
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Platformer\bin\WindowsGL\Debug\Content\DST-Arch-Delerium_wav.wav
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\obj\x86\Debug\Platformer.exe
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\obj\x86\Debug\Platformer.pdb
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\100x100.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\200x200.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\300x300.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\darkwoods.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\DST-Arch-Delerium.wma
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\DST-Arch-Delerium_wav.wav
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\dude.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\exit.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\gray.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\health.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\lightgray.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\loading.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\lucid.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\lucidity.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\monster.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\resume.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\start.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\title.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\warp.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\white.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Levels\key001.txt
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Levels\level001.txt
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Content\youdied.png
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Platformer.exe
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Platformer.pdb
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Jinsung\Documents\GitHub\LUCiD_v2\Platformer\obj\x86\Debug\LUCiD.csprojResolveAssemblyReference.cache

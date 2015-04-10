@@ -50,7 +50,7 @@ namespace LUCiD
         Rectangle lucidityRectangle;
 
         //*** Menu shit start ***//
-        private Texture2D title, startButton, exitButton, resumeButton, loadingScreen;
+        private Texture2D title, startButton, exitButton, resumeButton, loadingScreen, deathScreen;
         private Vector2 startButtonPosition, exitButtonPosition, resumeButtonPosition;
         private Thread backgroundThread;
         private bool isLoading = false;
@@ -64,7 +64,8 @@ namespace LUCiD
             Loading,
             Playing,
             Paused,
-            Win
+            Win,
+            Dead
         }
         //*** Menu shit end ***//
 
@@ -203,6 +204,7 @@ namespace LUCiD
             background = Content.Load<Texture2D>("darkwoods.png");
             healthTexture = Content.Load<Texture2D>("health.png");
             lucidityTexture = Content.Load<Texture2D>("lucidity.png");
+            deathScreen = Content.Load<Texture2D>("youdied.png");
 
             //*** Menu shit start ***//
             //load the buttonimages into the content pipeline
@@ -314,6 +316,11 @@ namespace LUCiD
             //insert here the player losing health update
             //if monster.intersect(player1)   player.health -= 10
 
+            if (player1.health <= 0)
+            {
+                gameState = GameState.Dead;
+            }
+
             if (gameState == GameState.Playing) //Pause monsters if not playing
             {
                 foreach (Monster monster in monsterList)
@@ -354,6 +361,13 @@ namespace LUCiD
             spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
         }
 
+        if (gameState == GameState.Dead)
+        {
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(deathScreen, new Rectangle(440, 180, 380, 100), Color.White);
+            spriteBatch.Draw(startButton, startButtonPosition, Color.White);
+            spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
+        }
         //show the loading screen when needed
         if (gameState == GameState.Loading)
         {
@@ -464,6 +478,22 @@ namespace LUCiD
                 Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X, (int)exitButtonPosition.Y, 100, 20);
 
                 if (mouseClickRect.Intersects(startButtonRect)) //player clicked start button
+                {
+                    gameState = GameState.Loading;
+                    isLoading = false;
+                }
+                else if (mouseClickRect.Intersects(exitButtonRect)) //player clicked exit button
+                {
+                    Exit();
+                }
+            }
+
+            if (gameState == GameState.Dead)
+            {
+                Rectangle restartButtonRect = new Rectangle((int)startButtonPosition.X, (int)startButtonPosition.Y, 100, 20);
+                Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X, (int)exitButtonPosition.Y, 100, 20);
+
+                if (mouseClickRect.Intersects(restartButtonRect)) //Not working part. Rectangle seems to not be drawn
                 {
                     gameState = GameState.Loading;
                     isLoading = false;

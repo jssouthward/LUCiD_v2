@@ -121,6 +121,9 @@
     <Content Include="Content\white.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\youdied.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
     <Content Include="Levels\key001.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
