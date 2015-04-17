@@ -1,0 +1,17 @@
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\bite.wav
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\Cake.png
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\Face.png
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\GameOverScreen.png
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\StartScreen.png
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\Yes.mp3
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Content\Arial.spritefont
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\SDL.dll
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Game1.exe
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Game1.pdb
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Lidgren.Network.dll
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\MonoGame.Framework.dll
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\OpenTK.dll
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\bin\WindowsGL\Debug\Tao.Sdl.dll
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\obj\x86\Debug\Game1.exe
+c:\users\ydc5yf.cslab\documents\visual studio 2013\Projects\Game1\Game1\obj\x86\Debug\Game1.pdb
