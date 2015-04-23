@@ -36,6 +36,8 @@ namespace LUCiD
         GameOverScreen gameOverScreen;
         LevelCompleteScreen levelCompleteScreen;
         Screen currentScreen;
+        SoundEffect song;
+        SoundEffectInstance mySong;
         string name;
         int level;
 
@@ -75,6 +77,11 @@ namespace LUCiD
             // TODO: use this.Content to load your game content here
             startScreen = new StartScreen(this);
             currentScreen = Screen.StartScreen;
+
+            //song = this.Content.Load<SoundEffect>("DST-Arch-Delerium_wav.wav");
+            //mySong = song.CreateInstance();
+            //mySong.IsLooped = true;
+            //mySong.Play();
 
             base.LoadContent();
         }
@@ -158,8 +165,8 @@ namespace LUCiD
 
         public void StartGame()
         {
-            level = 1;
-            name = "Levels/level1.txt";
+            level = 0;
+            name = "Levels/level0.txt";
             gameScreen = new GameScreen(this, spriteBatch, name);
             currentScreen = Screen.GameScreen;
 

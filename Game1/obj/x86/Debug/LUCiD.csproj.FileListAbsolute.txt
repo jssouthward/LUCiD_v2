@@ -66,3 +66,4 @@ C:\Users\ydc5yf.CSLAB\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\W
 C:\Users\ydc5yf.CSLAB\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\WindowsGL\Debug\Tao.Sdl.dll
 C:\Users\ydc5yf.CSLAB\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\obj\x86\Debug\LUCiD.csprojResolveAssemblyReference.cache
 C:\Users\ydc5yf.CSLAB\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\WindowsGL\Debug\Content\block.png
+C:\Users\ydc5yf.CSLAB\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\WindowsGL\Debug\Levels\level0.txt

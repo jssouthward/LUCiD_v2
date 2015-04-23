@@ -19,7 +19,7 @@ namespace LUCiD
         SpriteBatch spriteBatch;
         Player player1;
         Controls controls;
-        //Camera camera;
+        Camera camera;
         Monster monsterTemp; // generic monster used for filling the list
         Warp stageEnd;
         List<Block> blocks;
@@ -51,7 +51,7 @@ namespace LUCiD
             this.spriteBatch = spriteBatch;
             loadLevel(name);
             controls = new Controls();
-            //camera = new Camera(game.GraphicsDevice.Viewport);
+            camera = new Camera(game.GraphicsDevice.Viewport);
             player1.LoadContent(game.Content);
             darkness = game.Content.Load<Texture2D>("darkness");
             lightmask = game.Content.Load<Texture2D>("lightmask");
@@ -66,7 +66,7 @@ namespace LUCiD
         public void Update(GameTime gameTime)
         {
             controls.Update();
-            //camera.Update(gameTime, player1);
+            camera.Update(gameTime, player1);
             player1.testblocks = blocks;
             player1.powerTest = powerList;
             player1.monsterTest = monsterList;
@@ -117,9 +117,10 @@ namespace LUCiD
             game.GraphicsDevice.SetRenderTarget(mainScene);
             //game.GraphicsDevice.Clear(Color.Black);
 
+            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
             spriteBatch.Begin();
 
-            spriteBatch.Draw(background, new Rectangle(-300, -300, 3000, 1800), Color.White);
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             
             if (player1.endOfLevel == true)
             {
@@ -159,6 +160,9 @@ namespace LUCiD
             {
                 warp.Draw(spriteBatch);
             }
+
+            spriteBatch.Draw(healthTexture, new Rectangle(20, 20, (int)player1.health, 20), Color.White);
+            spriteBatch.Draw(lucidityTexture, new Rectangle(140, 20, (int)player1.lucidity, 20), Color.White);
 
             spriteBatch.End();
             game.GraphicsDevice.SetRenderTarget(null);
@@ -208,14 +212,14 @@ namespace LUCiD
             spriteBatch.Draw(mainScene, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
-            //BlendState multiply = new BlendState();
-            //multiply.ColorBlendFunction = BlendFunction.Add;
-            //multiply.ColorSourceBlend = Blend.DestinationColor;
-            //multiply.ColorDestinationBlend = Blend.Zero;
+            BlendState multiply = new BlendState();
+            multiply.ColorBlendFunction = BlendFunction.Add;
+            multiply.ColorSourceBlend = Blend.DestinationColor;
+            multiply.ColorDestinationBlend = Blend.Zero;
 
-            //spriteBatch.Begin(SpriteSortMode.Immediate, multiply);
-            //spriteBatch.Draw(lightMask, new Vector2(0, 0), Color.White);
-            //spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Immediate, multiply);
+            spriteBatch.Draw(lightMask, new Vector2(0, 0), Color.White);
+            spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Immediate, null);
             player1.Draw(spriteBatch);
