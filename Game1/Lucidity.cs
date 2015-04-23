@@ -15,7 +15,7 @@ namespace LUCiD
 {
     class Lucidity : Sprite
     {
-        private bool moving;
+        //private bool moving;
         private bool grounded;
         private int speed;
         private int x_accel;
@@ -27,7 +27,8 @@ namespace LUCiD
         public double gravity = .5;
         public int maxFallSpeed = 10;
         private int jumpPoint = 0;
-        public List<Monster> monsters;
+        public List<Moving> movings;
+        public List<Stationary> stationaries;
         public int direction;
         public bool spent = false;
 
@@ -38,7 +39,7 @@ namespace LUCiD
             this.spriteWidth = 20;
             this.spriteHeight = 20;
             grounded = false;
-            moving = false;
+            //moving = false;
             pushing = false;
             this.direction = direction;
 
@@ -70,7 +71,7 @@ namespace LUCiD
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("lucid.png");
+            image = content.Load<Texture2D>("lucid");
         }
 
         public void Draw(SpriteBatch sb)
@@ -103,19 +104,33 @@ namespace LUCiD
         private void checkCollisions()
         {
 
-            foreach (Monster monster in monsters)
+            foreach (Moving moving in movings)
             {
-                Rectangle currMonster = new Rectangle(monster.getX(), monster.getY(), monster.getSpriteWidth(), monster.getSpriteHeight());
+                Rectangle currMonster = new Rectangle(moving.getX(), moving.getY(), moving.getSpriteWidth(), moving.getSpriteHeight());
                 Rectangle lucidBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
 
                 Rectangle rect = Rectangle.Intersect(lucidBox, currMonster);
                 if (!rect.IsEmpty && !this.spent)
                 {
-                    monster.dead = true;
+                    moving.dead = true;
                     this.spent = true;
                     break;
                 }
-            } 
+            }
+
+            foreach (Stationary stationary in stationaries)
+            {
+                Rectangle currMonster = new Rectangle(stationary.getX(), stationary.getY(), stationary.getSpriteWidth(), stationary.getSpriteHeight());
+                Rectangle lucidBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
+
+                Rectangle rect = Rectangle.Intersect(lucidBox, currMonster);
+                if (!rect.IsEmpty && !this.spent)
+                {
+                    stationary.dead = true;
+                    this.spent = true;
+                    break;
+                }
+            }
  
         }
 

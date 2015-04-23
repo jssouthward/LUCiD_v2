@@ -13,26 +13,26 @@ using System.Text;
 
 namespace LUCiD
 {
-    public class HUD
+    class HUD
     {
-        private Vector2 scorePos = new Vector2(20, 10);
-
-        public SpriteFont Font { get; set; }
-
-        public int Score { get; set; }
-
-        public HUD()
+        GameLoop game;
+        Player player;
+        Texture2D healthTexture, lucidityTexture, header;
+        public HUD(GameLoop game, Player player1)
         {
+            this.game = game;
+            player = player1;
+            healthTexture = game.Content.Load<Texture2D>("health");
+            lucidityTexture = game.Content.Load<Texture2D>("lucidity");
+            header = game.Content.Load<Texture2D>("header");
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Draw the Score in the top-left of screen
-            spriteBatch.DrawString(
-                Font,                           // SpriteFont
-                "Score: " + Score.ToString(),   // Text
-                scorePos,                       // Position
-                Color.White);                   // Tint
+            spriteBatch.Draw(header, new Rectangle(0, 0, 1500, 52), Color.White);
+            spriteBatch.Draw(healthTexture, new Rectangle(100, 16, (int)player.health, 20), Color.White);
+            spriteBatch.Draw(lucidityTexture, new Rectangle(220, 16, (int)player.lucidity, 20), Color.White);
+            spriteBatch.End(); 
         }
     }
 }

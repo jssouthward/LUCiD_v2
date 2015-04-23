@@ -13,7 +13,7 @@ using System.Text;
 
 namespace LUCiD
 {
-    class Monster : Sprite
+    class Moving : Sprite
     {
         private bool moving;
         private bool grounded;
@@ -30,7 +30,7 @@ namespace LUCiD
         public List<Block> testblocks;
         public bool dead = false;
 
-        public Monster(int x, int y, int width, int height)
+        public Moving(int x, int y, int width, int height)
         {
             this.spriteX = x;
             this.spriteY = y;
@@ -76,7 +76,7 @@ namespace LUCiD
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("monster.png");
+            image = content.Load<Texture2D>("monster");
         }
 
         public void Draw(SpriteBatch sb)

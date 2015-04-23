@@ -19,31 +19,32 @@ namespace LUCiD
         SpriteBatch spriteBatch;
         Player player1;
         Controls controls;
-        Camera camera;
-        Monster monsterTemp; // generic monster used for filling the list
-        Warp stageEnd;
+        //Camera camera;
+        Moving movingTemp; // generic moving monster used for filling the list
+        //Warp stageEnd;
         List<Block> blocks;
-        List<Monster> monsterList = new List<Monster>();
-        List<Monster> temp = new List<Monster>(); //temporary monster list
+        List<Moving> movingList = new List<Moving>();
+        List<Moving> temp = new List<Moving>(); //temporary moving monster list
+        Stationary stationaryTemp;
+        List<Stationary> stationaryList = new List<Stationary>();
+        List<Stationary> temp2 = new List<Stationary>(); //temporary stationary monster list
         List<Powerup> powerList = new List<Powerup>();
         List<Lucidity> shotList = new List<Lucidity>();
         List<Warp> warpList = new List<Warp>();
         Powerup powerTemp;
         Warp warpTemp;
         string[,] level;
+        string[,] reset;
         Dictionary<string, string> key = new Dictionary<string, string>();
         int darkX;
         int darkY;
-        Texture2D background, darkness, lightmask;
-        //health bar
-        Texture2D healthTexture;
-
-        //lucidity bar
-        Texture2D lucidityTexture;
-
+        Texture2D background, darkness, lightmask, tut1, tut2, tut3, tut4, tut5, tut6;
+        HUD hud;
         //lighting
         RenderTarget2D mainScene;
         RenderTarget2D lightMask;
+        Timer timer;
+        SpriteFont font;
 
         public GameScreen(GameLoop game, SpriteBatch spriteBatch, string name)
         {
@@ -51,13 +52,20 @@ namespace LUCiD
             this.spriteBatch = spriteBatch;
             loadLevel(name);
             controls = new Controls();
-            camera = new Camera(game.GraphicsDevice.Viewport);
+            timer = new Timer();  
+            //camera = new Camera(game.GraphicsDevice.Viewport);
             player1.LoadContent(game.Content);
             darkness = game.Content.Load<Texture2D>("darkness");
             lightmask = game.Content.Load<Texture2D>("lightmask");
             background = game.Content.Load<Texture2D>("darkwoods");
-            healthTexture = game.Content.Load<Texture2D>("health");
-            lucidityTexture = game.Content.Load<Texture2D>("lucidity");
+            tut1 = game.Content.Load<Texture2D>("tut1");
+            tut2 = game.Content.Load<Texture2D>("tut2");
+            tut3 = game.Content.Load<Texture2D>("tut3");
+            tut4 = game.Content.Load<Texture2D>("tut4");
+            tut5 = game.Content.Load<Texture2D>("tut5");
+            tut6 = game.Content.Load<Texture2D>("tut6");
+            font = game.Content.Load<SpriteFont>("Font");
+            hud = new HUD(game, player1);
             var pp = game.GraphicsDevice.PresentationParameters;
             mainScene = new RenderTarget2D(game.GraphicsDevice, pp.BackBufferWidth, pp.BackBufferHeight);
             lightMask = new RenderTarget2D(game.GraphicsDevice, pp.BackBufferWidth, pp.BackBufferHeight);
@@ -65,11 +73,20 @@ namespace LUCiD
 
         public void Update(GameTime gameTime)
         {
+            if (timer.isRunning == false)
+            {
+                timer.start(60);
+            }
+            else
+            {
+                timer.checkTime(game, gameTime);
+            }
             controls.Update();
-            camera.Update(gameTime, player1);
+            //camera.Update(gameTime, player1);
             player1.testblocks = blocks;
             player1.powerTest = powerList;
-            player1.monsterTest = monsterList;
+            player1.movingTest = movingList;
+            player1.stationaryTest = stationaryList;
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
 
@@ -91,17 +108,25 @@ namespace LUCiD
 
             foreach (Lucidity lucid in shotList)
             {
-                lucid.monsters = this.monsterList;
+                lucid.movings = this.movingList;
+                lucid.stationaries = this.stationaryList;
                 lucid.Update(controls, gameTime);
             }
             shotList.RemoveAll(lucid => lucid.spent == true);
 
-            foreach (Monster monster in monsterList)
+            foreach (Moving moving in movingList)
             {
-                monster.testblocks = blocks;
-                monster.Update(controls, gameTime);
+                moving.testblocks = blocks;
+                moving.Update(controls, gameTime);
             }
-            monsterList.RemoveAll(monster => monster.dead == true);
+            movingList.RemoveAll(moving => moving.dead == true);
+
+            foreach (Stationary stationary in stationaryList)
+            {
+                stationary.testblocks = blocks;
+                stationary.Update(controls, gameTime);
+            }
+            stationaryList.RemoveAll(stationary => stationary.dead == true);
 
             foreach (Powerup power in powerList)
             {
@@ -127,11 +152,19 @@ namespace LUCiD
                 game.LevelComplete();
             }
 
-            foreach (Monster monster in monsterList)
+            foreach (Moving moving in movingList)
             {
-                if (monster.dead == false)
+                if (moving.dead == false)
                 {
-                    monster.Draw(spriteBatch);
+                    moving.Draw(spriteBatch);
+                }
+            }
+
+            foreach (Stationary stationary in stationaryList)
+            {
+                if (stationary.dead == false)
+                {
+                    stationary.Draw(spriteBatch);
                 }
             }
 
@@ -161,8 +194,15 @@ namespace LUCiD
                 warp.Draw(spriteBatch);
             }
 
-            spriteBatch.Draw(healthTexture, new Rectangle(20, 20, (int)player1.health, 20), Color.White);
-            spriteBatch.Draw(lucidityTexture, new Rectangle(140, 20, (int)player1.lucidity, 20), Color.White);
+            if (game.level == 0)
+            {
+                spriteBatch.Draw(tut1, new Rectangle(30, 550, 137, 91), Color.White);
+                spriteBatch.Draw(tut2, new Rectangle(180, 400, 137, 91), Color.White);
+                spriteBatch.Draw(tut3, new Rectangle(340, 550, 137, 91), Color.White);
+                spriteBatch.Draw(tut4, new Rectangle(540, 370, 137, 91), Color.White);
+                spriteBatch.Draw(tut5, new Rectangle(800, 550, 137, 91), Color.White);
+                spriteBatch.Draw(tut6, new Rectangle(1050, 550, 137, 91), Color.White);
+            }
 
             spriteBatch.End();
             game.GraphicsDevice.SetRenderTarget(null);
@@ -183,24 +223,31 @@ namespace LUCiD
             {
                 var pos = new Rectangle(power.getX() - 40, power.getY() - 40, 100, 100);
                 spriteBatch.Draw(lightmask, pos, Color.White);
-                //spriteBatch.Draw(lightmask, pos, Color.White);
             }
             foreach (Lucidity shot in shotList)
             {
                 var pos2 = new Rectangle(shot.getX() - 40, shot.getY() - 40, 100, 100);
                 spriteBatch.Draw(lightmask, pos2, Color.White);
             }
-            if (player1.lucidity < 33)
+            if (player1.lucidity >= 0 && player1.lucidity < 20)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX + 100, darkY + 100, 100, 100), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX, darkY, 0, 0), Color.White);
             }
-            if (player1.lucidity < 67 && player1.lucidity >= 33)
+            else if (player1.lucidity >= 20 && player1.lucidity < 40)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX + 50, darkY + 50, 200, 200), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX + 75, darkY + 75, 150, 150), Color.White);
             }
-            if (player1.lucidity >= 67)
+            else if (player1.lucidity >= 40 && player1.lucidity < 60)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX, darkY, 300, 300), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX + 35, darkY + 35, 200, 200), Color.White);
+            }
+            else if (player1.lucidity >= 60 && player1.lucidity < 80)
+            {
+                spriteBatch.Draw(lightmask, new Rectangle(darkX + 15, darkY + 15, 250, 250), Color.White);
+            }
+            else if (player1.lucidity >= 80)
+            {
+                spriteBatch.Draw(lightmask, new Rectangle(darkX - 5, darkY - 5, 300, 300), Color.White);
             }
             spriteBatch.End();
 
@@ -223,8 +270,16 @@ namespace LUCiD
 
             spriteBatch.Begin(SpriteSortMode.Immediate, null);
             player1.Draw(spriteBatch);
+            hud.Draw(spriteBatch);
+            spriteBatch.End();
 
-            //hud.Draw(spriteBatch);
+            //Draw timer
+            spriteBatch.Begin();
+            spriteBatch.DrawString(font, "Level " + game.level.ToString(), new Vector2(20, 18), Color.White);
+            if (!timer.isFinished)
+            {
+                spriteBatch.DrawString(font, timer.displayClock, new Vector2(350, 18), Color.White);
+            }
             spriteBatch.End();
         }
         public void loadLevel(string name)
@@ -274,13 +329,19 @@ namespace LUCiD
                     }
                     if (level[i, j].Equals("M"))
                     {
-                        monsterTemp = new Monster(20 * j, 20 * i, 40, 40);
-                        monsterTemp.LoadContent(game.Content);
-                        monsterList.Add(monsterTemp);
+                        movingTemp = new Moving(20 * j, 20 * i, 40, 40);
+                        movingTemp.LoadContent(game.Content);
+                        movingList.Add(movingTemp);
+                    }
+                    if (level[i, j].Equals("m"))
+                    {
+                        stationaryTemp = new Stationary(25 * j, 25 * i, 40, 40);
+                        stationaryTemp.LoadContent(game.Content);
+                        stationaryList.Add(stationaryTemp);
                     }
                     if (level[i, j].Equals("U"))
                     {
-                        powerTemp = new Powerup(20 * j, 20 * i, 20, 20);
+                        powerTemp = new Powerup(25 * j, 25 * i, 20, 20);
                         powerTemp.LoadContent(game.Content);
                         powerList.Add(powerTemp);
                     }

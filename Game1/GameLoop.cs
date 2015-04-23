@@ -39,7 +39,7 @@ namespace LUCiD
         SoundEffect song;
         SoundEffectInstance mySong;
         string name;
-        int level;
+        public int level;
 
         public GameLoop()
         {
@@ -78,7 +78,7 @@ namespace LUCiD
             startScreen = new StartScreen(this);
             currentScreen = Screen.StartScreen;
 
-            //song = this.Content.Load<SoundEffect>("DST-Arch-Delerium_wav.wav");
+            //song = this.Content.Load<SoundEffect>("DST-Arch-Delerium_wav");
             //mySong = song.CreateInstance();
             //mySong.IsLooped = true;
             //mySong.Play();

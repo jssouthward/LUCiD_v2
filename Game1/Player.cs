@@ -29,7 +29,8 @@ namespace LUCiD
         private int jumpPoint = 0;
         public List<Block> testblocks;
         public List<Powerup> powerTest;
-        public List<Monster> monsterTest;
+        public List<Moving> movingTest;
+        public List<Stationary> stationaryTest;
         public List<Warp> warpTest;
         public List<Lucidity> shotTest = new List<Lucidity>();
         public int currDirection = 1;
@@ -155,7 +156,10 @@ namespace LUCiD
                 if (!rectPower.IsEmpty && power.collected == false)
                 {
                     power.collected = true;
-                    this.lucidity += 20;
+                    if(this.lucidity < 100)
+                    {
+                        this.lucidity += 20;
+                    }
                 }
             }
 
@@ -164,18 +168,29 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(warp.getX(), warp.getY(), warp.getSpriteWidth(), warp.getSpriteHeight());
                 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty && this.spriteX == warp.getX()) //player is actually touching the base of the warp
+                if (!rectPower.IsEmpty && (warp.getX() - warp.getSpriteWidth() / 2 + this.spriteWidth + 2) <= this.spriteX && this.spriteX <= warp.getX() + (warp.getSpriteWidth()) / 2 - this.spriteWidth / 2 + 10)
                 {
                     this.endOfLevel = true;
                 }
             }
 
-            foreach (Monster monster in monsterTest)
+            foreach (Moving moving in movingTest)
             {
-                Rectangle currPower = new Rectangle(monster.getX(), monster.getY(), monster.getSpriteWidth(), monster.getSpriteHeight());
+                Rectangle currPower = new Rectangle(moving.getX(), moving.getY(), moving.getSpriteWidth(), moving.getSpriteHeight());
                 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty && monster.dead == false)
+                if (!rectPower.IsEmpty && moving.dead == false)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (Stationary stationary in stationaryTest)
+            {
+                Rectangle currPower = new Rectangle(stationary.getX(), stationary.getY(), stationary.getSpriteWidth(), stationary.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty && stationary.dead == false)
                 {
                     this.health -= 0.3;
                 }

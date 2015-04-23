@@ -53,7 +53,7 @@ namespace LUCiD
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(youdied, new Rectangle(350, 90, 501, 91), Color.White);
+            spriteBatch.Draw(youdied, new Rectangle(390, 90, 500, 90), Color.White);
             spriteBatch.Draw(startButton, startButtonPosition, Color.White);
             spriteBatch.Draw(exitButton, exitButtonPosition, Color.White);
         }

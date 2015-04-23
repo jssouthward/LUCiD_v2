@@ -52,7 +52,7 @@ namespace LUCiD
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("lucid.png");
+            image = content.Load<Texture2D>("lucid");
         }
 
         public void Draw(SpriteBatch sb)
