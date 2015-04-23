@@ -24,7 +24,7 @@ namespace LUCiD
             this.spriteWidth = width;
             this.spriteHeight = height;
             this.game = game;
-            image = game.Content.Load<Texture2D>("gray");
+            image = game.Content.Load<Texture2D>("block");
         }
 
         public int getX(){

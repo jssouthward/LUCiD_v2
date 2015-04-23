@@ -25,8 +25,8 @@ namespace LUCiD
         }
         public void Update(GameTime gameTime, Player player1)
         {
-            
-            centre = new Vector2(player1.getX() + (32 / 2)-400 , player1.getY() + (64 / 2) - 400) ;
+
+            centre = new Vector2(player1.getX() + (32 / 2) - 400, player1.getY() + (64 / 2) - 400);
             transform = Matrix.CreateScale(new Vector3(1, 1, 0)) * Matrix.CreateTranslation(new Vector3(-centre.X, -centre.Y, 0));
         }
     }

@@ -35,8 +35,8 @@ namespace LUCiD
         {
             this.spriteX = x;
             this.spriteY = y;
-            this.spriteWidth = width;
-            this.spriteHeight = height;
+            this.spriteWidth = 20;
+            this.spriteHeight = 20;
             grounded = false;
             moving = false;
             pushing = false;
