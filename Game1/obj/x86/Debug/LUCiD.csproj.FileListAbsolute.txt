@@ -77,7 +77,6 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\obj\x86\Debug\
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\block.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\darkness.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\darkwoods.png
-C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\dude.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\exit.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\gray.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\header.png
@@ -159,3 +158,9 @@ C:\Users\ydc5yf\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\Windows
 C:\Users\ydc5yf\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\WindowsGL\Debug\Content\spikeT.png
 C:\Users\ydc5yf\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\WindowsGL\Debug\Content\character.png
 C:\Users\ydc5yf\Documents\Visual Studio 2013\Projects\LUCiD_v2\Game1\bin\WindowsGL\Debug\Content\warpmask.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\character.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\spikeB.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\spikeL.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\spikeR.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\spikeT.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\warpmask.png

@@ -27,6 +27,7 @@ namespace LUCiD
         public double gravity = .5;
         public int maxFallSpeed = 10;
         private int jumpPoint = 0;
+        public List<ThickBlock> thickblocks;
         public List<Moving> movings;
         public List<Stationary> stationaries;
         public List<Jumping> jumpings;
@@ -105,6 +106,7 @@ namespace LUCiD
         private void checkCollisions()
         {
 
+
             foreach (Moving moving in movings)
             {
                 Rectangle currMonster = new Rectangle(moving.getX(), moving.getY(), moving.getSpriteWidth(), moving.getSpriteHeight());
@@ -142,6 +144,18 @@ namespace LUCiD
                 if (!rect.IsEmpty && !this.spent)
                 {
                     stationary.dead = true;
+                    this.spent = true;
+                    break;
+                }
+            }
+
+            foreach (ThickBlock block in thickblocks)
+            {
+                Rectangle currBlock = new Rectangle(block.getX(), block.getY(), block.getSpriteWidth(), block.getSpriteHeight());
+                Rectangle lucidBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
+                Rectangle rect = Rectangle.Intersect(lucidBox, currBlock);
+                if (!rect.IsEmpty && !this.spent)
+                {
                     this.spent = true;
                     break;
                 }

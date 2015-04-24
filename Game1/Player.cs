@@ -28,6 +28,7 @@ namespace LUCiD
         public int maxFallSpeed = 10;
         private int jumpPoint = 0;
         public List<Block> testblocks;
+        public List<ThickBlock> testthick;
         public List<Powerup> powerTest;
         public List<Moving> movingTest;
         public List<Stationary> stationaryTest;
@@ -55,8 +56,8 @@ namespace LUCiD
         // total number of frames in our spritesheet
         const int totalFrames = 3;
         // define the size of our animation frame
-        int frameHeight = 64;
-        int frameWidth = 28;
+        int frameHeight = 60;
+        int frameWidth = 40;
         Rectangle source;
 
         public Player(int x, int y, int width, int height)
@@ -322,6 +323,42 @@ namespace LUCiD
 
             // TODO need to handle case where 1x1 corner
             foreach (Block block in testblocks)
+            {
+                Rectangle currBlock = new Rectangle(block.getX(), block.getY(), block.getSpriteWidth(), block.getSpriteHeight());
+                Rectangle rect = Rectangle.Intersect(playerBox, currBlock);
+                if (!rect.IsEmpty && rect.Width > rect.Height && this.spriteY < rect.Y)
+                {
+                    grounded = true;
+                }
+
+                if (rect.Height > rect.Width && this.spriteX < rect.X)
+                {
+                    // side collision with player on the left
+                    this.spriteX -= rect.Width;
+                    x_vel = 0;
+                }
+                if (rect.Height > rect.Width && this.spriteX + 1 > rect.X)
+                {
+                    //side collision with player on the right
+                    this.spriteX += rect.Width;
+                    x_vel = 0;
+                    //Console.WriteLine("collision");
+                }
+                if (rect.Height < rect.Width && this.spriteY < rect.Y)
+                {
+                    // floor collision
+                    this.spriteY -= rect.Height - 1;
+                    y_vel = 0;
+                }
+                if (rect.Height < rect.Width && this.spriteY + 1 > rect.Y)
+                {
+                    // ceiling collision
+                    this.spriteY += rect.Height + 1;
+                    y_vel = 0;
+                }
+            }
+
+            foreach (ThickBlock block in testthick)
             {
                 Rectangle currBlock = new Rectangle(block.getX(), block.getY(), block.getSpriteWidth(), block.getSpriteHeight());
                 Rectangle rect = Rectangle.Intersect(playerBox, currBlock);

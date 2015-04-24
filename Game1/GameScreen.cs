@@ -27,6 +27,7 @@ namespace LUCiD
         SpikeB spikeBTemp;
         SpikeT spikeTTemp;
         List<Block> blocks;
+        List<ThickBlock> thickblocks;
         List<Moving> movingList = new List<Moving>();
         List<Jumping> jumpingList = new List<Jumping>();
         List<Stationary> stationaryList = new List<Stationary>();
@@ -88,6 +89,7 @@ namespace LUCiD
             }
             controls.Update();
             player1.testblocks = blocks;
+            player1.testthick = thickblocks;
             player1.powerTest = powerList;
             player1.movingTest = movingList;
             player1.jumpingTest = jumpingList;
@@ -127,6 +129,7 @@ namespace LUCiD
                 lucid.movings = this.movingList;
                 lucid.stationaries = this.stationaryList;
                 lucid.jumpings = this.jumpingList;
+                lucid.thickblocks = thickblocks;
                 lucid.Update(controls, gameTime);
             }
             shotList.RemoveAll(lucid => lucid.spent == true);
@@ -228,6 +231,11 @@ namespace LUCiD
             }
 
             foreach (Block block in blocks)
+            {
+                block.Draw(spriteBatch);
+            }
+
+            foreach (ThickBlock block in thickblocks)
             {
                 block.Draw(spriteBatch);
             }
@@ -347,6 +355,7 @@ namespace LUCiD
             int numCols = lines[0].Length;
             int realnumCols = lines[0].Split(new Char[] { ' ' }).Length; //removes the whitespace
             blocks = new List<Block>();
+            thickblocks = new List<ThickBlock>();
             level = new string[numRows, realnumCols]; // number of rows by number of columns
             int levelindex = 0;
 
@@ -372,6 +381,11 @@ namespace LUCiD
                     {
                         Block temp = new Block(25 * j, 25 * i, 25, 25, game);
                         blocks.Add(temp);
+                    }
+                    if (level[i, j].Equals("Z"))
+                    {
+                        ThickBlock temp = new ThickBlock(25 * j, 25 * i, 25, 25, game);
+                        thickblocks.Add(temp);
                     }
                     if (level[i, j].Equals("W"))
                     {
