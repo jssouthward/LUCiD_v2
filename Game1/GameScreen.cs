@@ -103,6 +103,11 @@ namespace LUCiD
                 game.GameOver();
             }
 
+            if (player1.getY() > 780)
+            {
+                game.GameOver();
+            }
+
             if (controls.onPress(Keys.X, Buttons.LeftShoulder) && player1.lucidity > 5)
             {
                 Lucidity shotTemp = new Lucidity(player1.getX(), player1.getY(), 32, 32, player1.currDirection);
