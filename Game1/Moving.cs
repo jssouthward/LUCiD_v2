@@ -106,8 +106,6 @@ namespace LUCiD
                 x_vel = -1 * prev_x_vel;
             }
 
-            double playerFriction = pushing ? (friction * 3) : friction;
-            x_vel = x_vel + x_accel * .10;
             movedX = Convert.ToInt32(x_vel);
             spriteX += movedX;
 

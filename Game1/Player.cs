@@ -46,7 +46,7 @@ namespace LUCiD
         public bool endOfLevel = false;
         public bool moved = false;
         public int hittimer = 0;
-        public int hitthreshold = 10;
+        public int hitthreshold = 5;
 
         //animation
         // the elapsed amount of time the frame has been shown for
@@ -105,26 +105,53 @@ namespace LUCiD
 
         public void Draw(SpriteBatch sb)
         {
-            if (!moved && (currDirection == 1))
+            if (this.hittimer >= this.hitthreshold)
             {
-                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
-                0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                if (!moved && (currDirection == 1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
+                else if (!moved && (currDirection == -1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
+                else if (moved && (currDirection == 1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), source, Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
+                else if (moved && (currDirection == -1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), source, Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
             }
-            else if (!moved && (currDirection == -1))
+            else if (this.hittimer < this.hitthreshold && this.hittimer % 2 == 1)
             {
-                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
-                0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                if (!moved && (currDirection == 1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
+                else if (!moved && (currDirection == -1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
+                else if (moved && (currDirection == 1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), source, Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
+                else if (moved && (currDirection == -1))
+                {
+                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), source, Color.White,
+                    0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
+                }
             }
-            else if (moved && (currDirection == 1))
-            {
-                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), source, Color.White,
-                0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
-            }
-            else if (moved && (currDirection == -1))
-            {
-                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), source, Color.White,
-                0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
-            }
+            
         }
 
         public void Update(Controls controls, GameTime gameTime)
@@ -254,7 +281,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && moving.dead == false && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                 }
             }
@@ -266,7 +293,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && jumping.dead == false && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                 }
             }
@@ -278,7 +305,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && stationary.dead == false && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                 }
             }
@@ -290,7 +317,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                     this.x_vel = -5 * this.x_vel;
                 }
@@ -303,7 +330,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                     this.x_vel = -5 * this.x_vel;
                 }
@@ -316,7 +343,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                     this.y_vel = -1 * this.y_vel;
                 }
@@ -329,7 +356,7 @@ namespace LUCiD
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
-                    this.health -= 0.3;
+                    this.health -= 1;
                     hittimer = 0;
                     this.y_vel = -1 * this.y_vel;
                 }
