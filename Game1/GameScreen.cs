@@ -43,7 +43,7 @@ namespace LUCiD
         Dictionary<string, string> key = new Dictionary<string, string>();
         int darkX;
         int darkY;
-        Texture2D background, darkness, lightmask, tut1, tut2, tut3, tut4, tut5, tut6;
+        Texture2D background, darkness, lightmask, warpmask, tut1, tut2, tut3, tut4, tut5, tut6;
         HUD hud;
         //lighting
         RenderTarget2D mainScene;
@@ -61,6 +61,7 @@ namespace LUCiD
             player1.LoadContent(game.Content);
             darkness = game.Content.Load<Texture2D>("darkness");
             lightmask = game.Content.Load<Texture2D>("lightmask");
+            warpmask = game.Content.Load<Texture2D>("warpmask");
             background = game.Content.Load<Texture2D>("darkwoods");
             tut1 = game.Content.Load<Texture2D>("tut1");
             tut2 = game.Content.Load<Texture2D>("tut2");
@@ -273,6 +274,11 @@ namespace LUCiD
             {
                 var pos = new Rectangle(power.getX() - 40, power.getY() - 40, 100, 100);
                 spriteBatch.Draw(lightmask, pos, Color.White);
+            }
+            foreach (Warp warp in warpList)
+            {
+                var pos = new Rectangle(warp.getX() - 25, warp.getY() - 50, 100, 100);
+                spriteBatch.Draw(warpmask, pos, Color.White);
             }
             foreach (Lucidity shot in shotList)
             {
