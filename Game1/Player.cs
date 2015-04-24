@@ -45,6 +45,8 @@ namespace LUCiD
         public double health = 100;
         public bool endOfLevel = false;
         public bool moved = false;
+        public int hittimer = 0;
+        public int hitthreshold = 10;
 
         //animation
         // the elapsed amount of time the frame has been shown for
@@ -127,6 +129,7 @@ namespace LUCiD
 
         public void Update(Controls controls, GameTime gameTime)
         {
+            hittimer++;
             // Process elapsed time
             if (moved)
             {
@@ -249,9 +252,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(moving.getX(), moving.getY(), moving.getSpriteWidth(), moving.getSpriteHeight());
                 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty && moving.dead == false)
+                if (!rectPower.IsEmpty && moving.dead == false && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
@@ -260,9 +264,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(jumping.getX(), jumping.getY(), jumping.getSpriteWidth(), jumping.getSpriteHeight());
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty && jumping.dead == false)
+                if (!rectPower.IsEmpty && jumping.dead == false && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
@@ -271,9 +276,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(stationary.getX(), stationary.getY(), stationary.getSpriteWidth(), stationary.getSpriteHeight());
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty && stationary.dead == false)
+                if (!rectPower.IsEmpty && stationary.dead == false && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
@@ -282,9 +288,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(spikeR.getX(), spikeR.getY(), spikeR.getSpriteWidth(), spikeR.getSpriteHeight());
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty)
+                if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
@@ -293,9 +300,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(spikeL.getX(), spikeL.getY(), spikeL.getSpriteWidth(), spikeL.getSpriteHeight());
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty)
+                if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
@@ -304,9 +312,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(spikeB.getX(), spikeB.getY(), spikeB.getSpriteWidth(), spikeB.getSpriteHeight());
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty)
+                if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
@@ -315,9 +324,10 @@ namespace LUCiD
                 Rectangle currPower = new Rectangle(spikeT.getX(), spikeT.getY(), spikeT.getSpriteWidth(), spikeT.getSpriteHeight());
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
-                if (!rectPower.IsEmpty)
+                if (!rectPower.IsEmpty && hittimer > hitthreshold)
                 {
                     this.health -= 0.3;
+                    hittimer = 0;
                 }
             }
 
