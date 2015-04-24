@@ -25,7 +25,8 @@ namespace LUCiD
             StartScreen,
             GameScreen,
             GameOverScreen,
-            LevelCompleteScreen
+            LevelCompleteScreen,
+            WinScreen
         }
         
         GraphicsDeviceManager graphics;
@@ -35,6 +36,7 @@ namespace LUCiD
         GameScreen gameScreen;
         GameOverScreen gameOverScreen;
         LevelCompleteScreen levelCompleteScreen;
+        WinScreen winScreen;
         Screen currentScreen;
         SoundEffect song;
         SoundEffectInstance mySong;
@@ -156,6 +158,10 @@ namespace LUCiD
                     if (levelCompleteScreen != null)
                         levelCompleteScreen.Draw(spriteBatch);
                     break;
+                case Screen.WinScreen:
+                    if (winScreen != null)
+                        winScreen.Draw(spriteBatch);
+                    break;
             }
 
             spriteBatch.End();
@@ -173,6 +179,18 @@ namespace LUCiD
             startScreen = null;
             gameOverScreen = null;
             levelCompleteScreen = null;
+            winScreen = null;
+        }
+        public void TryAgain()
+        {
+            name = "Levels/level" + level + ".txt";
+            gameScreen = new GameScreen(this, spriteBatch, name);
+            currentScreen = Screen.GameScreen;
+
+            startScreen = null;
+            gameOverScreen = null;
+            levelCompleteScreen = null;
+            winScreen = null;
         }
         public void GameOver()
         {
@@ -182,6 +200,7 @@ namespace LUCiD
             startScreen = null;
             gameScreen = null;
             levelCompleteScreen = null;
+            winScreen = null;
         }
         public void LevelComplete()
         {
@@ -191,6 +210,7 @@ namespace LUCiD
             startScreen = null;
             gameScreen = null;
             gameOverScreen = null;
+            winScreen = null;
         }
         public void NextLevel()
         {
@@ -200,6 +220,17 @@ namespace LUCiD
             currentScreen = Screen.GameScreen;
 
             startScreen = null;
+            gameOverScreen = null;
+            levelCompleteScreen = null;
+            winScreen = null;
+        }
+        public void WinGame()
+        {
+            winScreen = new WinScreen(this);
+            currentScreen = Screen.WinScreen;
+
+            startScreen = null;
+            gameScreen = null;
             gameOverScreen = null;
             levelCompleteScreen = null;
         }

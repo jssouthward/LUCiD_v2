@@ -81,7 +81,7 @@ namespace LUCiD
         {
             if (timer.isRunning == false)
             {
-                timer.start(60);
+                timer.start(300);
             }
             else
             {
@@ -101,17 +101,15 @@ namespace LUCiD
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
 
-            //darkX = player1.getX() - 134; //150-16 offset for player
-            //darkY = player1.getY() - 118; //150-32
-            darkX = player1.getX() - 120;
-            darkY = player1.getY() - 120;
+            darkX = player1.getX() - 122;
+            darkY = player1.getY() - 94;
 
             if (player1.health <= 0)
             {
                 game.GameOver();
             }
 
-            if (player1.getY() > 780)
+            if (player1.getY() > 1000)
             {
                 game.GameOver();
             }
@@ -176,7 +174,11 @@ namespace LUCiD
 
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             
-            if (player1.endOfLevel == true)
+            if (player1.endOfLevel == true && game.level == 4)
+            {
+                game.WinGame();
+            }
+            else if (player1.endOfLevel == true)
             {
                 game.LevelComplete();
             }
@@ -260,7 +262,7 @@ namespace LUCiD
             {
                 spriteBatch.Draw(tut1, new Rectangle(30, 550, 137, 91), Color.White);
                 spriteBatch.Draw(tut2, new Rectangle(180, 400, 137, 91), Color.White);
-                spriteBatch.Draw(tut3, new Rectangle(340, 550, 137, 91), Color.White);
+                spriteBatch.Draw(tut3, new Rectangle(340, 570, 137, 91), Color.White);
                 spriteBatch.Draw(tut4, new Rectangle(540, 370, 137, 91), Color.White);
                 spriteBatch.Draw(tut5, new Rectangle(800, 550, 137, 91), Color.White);
                 spriteBatch.Draw(tut6, new Rectangle(1050, 550, 137, 91), Color.White);
@@ -293,7 +295,7 @@ namespace LUCiD
             }
             foreach (Lucidity shot in shotList)
             {
-                var pos2 = new Rectangle(shot.getX() - 40, shot.getY() - 40, 100, 100);
+                var pos2 = new Rectangle(shot.getX() - 60, shot.getY() - 60, 150, 150);
                 spriteBatch.Draw(lightmask, pos2, Color.White);
             }
             if (player1.lucidity <= 5)
@@ -302,19 +304,19 @@ namespace LUCiD
             }
             else if (player1.lucidity > 5 && player1.lucidity < 40)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX + 75, darkY + 75, 150, 150), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX + 45, darkY + 45, 150, 150), Color.White);
             }
             else if (player1.lucidity >= 40 && player1.lucidity < 60)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX + 35, darkY + 35, 200, 200), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX + 20, darkY + 25, 200, 200), Color.White);
             }
             else if (player1.lucidity >= 60 && player1.lucidity < 80)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX + 15, darkY + 15, 250, 250), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX, darkY, 250, 250), Color.White);
             }
             else if (player1.lucidity >= 80)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX - 5, darkY - 5, 300, 300), Color.White);
+                spriteBatch.Draw(lightmask, new Rectangle(darkX - 28, darkY - 56, 300, 300), Color.White);
             }
             spriteBatch.End();
 

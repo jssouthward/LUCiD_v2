@@ -15,16 +15,10 @@ namespace LUCiD
 {
     class Jumping : Sprite
     {
-        private bool moving;
         private bool grounded;
-        private int speed;
-        private int x_accel;
-        private double friction;
         public double x_vel;
         public double y_vel;
-        public double prev_x_vel;
         public int movedX;
-        private bool pushing;
         public double gravity = .5;
         public int maxFallSpeed = 10;
         public List<Block> testblocks;
@@ -39,13 +33,8 @@ namespace LUCiD
             this.spriteWidth = width;
             this.spriteHeight = height;
             grounded = false;
-            moving = false;
-            pushing = false;
 
             // Movement
-            speed = 0;
-            friction = .15;
-            x_accel = 0;
             x_vel = -2;
             y_vel = 0;
             movedX = 0;
@@ -206,7 +195,7 @@ namespace LUCiD
 
         private void Jump(Controls controls, GameTime gameTime)
         {
-            if (jumptimer > 150) // Change this to change how fast it jumps
+            if (jumptimer > 100) // Change this to change how fast it jumps
             { 
             if (grounded)
             {

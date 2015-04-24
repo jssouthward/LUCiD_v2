@@ -58,8 +58,8 @@ namespace LUCiD
         // total number of frames in our spritesheet
         const int totalFrames = 3;
         // define the size of our animation frame
-        int frameHeight = 60;
-        int frameWidth = 40;
+        int frameHeight = 56;
+        int frameWidth = 28;
         Rectangle source;
 
         public Player(int x, int y, int width, int height)
@@ -109,22 +109,22 @@ namespace LUCiD
             {
                 if (!moved && (currDirection == 1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
                 else if (!moved && (currDirection == -1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
                 else if (moved && (currDirection == 1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), source, Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), source, Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
                 else if (moved && (currDirection == -1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), source, Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), source, Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
             }
@@ -132,22 +132,22 @@ namespace LUCiD
             {
                 if (!moved && (currDirection == 1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
                 else if (!moved && (currDirection == -1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
                 else if (moved && (currDirection == 1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 40, 50, 50), source, Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), source, Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
                 else if (moved && (currDirection == -1))
                 {
-                    sb.Draw(image, new Rectangle(spriteX + 20, spriteY + 40, 50, 50), source, Color.White,
+                    sb.Draw(image, new Rectangle(spriteX + 10, spriteY + 39, 17, 35), source, Color.White,
                     0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
                 }
             }
