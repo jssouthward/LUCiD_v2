@@ -292,6 +292,7 @@ namespace LUCiD
                 {
                     this.health -= 0.3;
                     hittimer = 0;
+                    this.x_vel = -5 * this.x_vel;
                 }
             }
 
@@ -304,6 +305,7 @@ namespace LUCiD
                 {
                     this.health -= 0.3;
                     hittimer = 0;
+                    this.x_vel = -5 * this.x_vel;
                 }
             }
 
@@ -316,6 +318,7 @@ namespace LUCiD
                 {
                     this.health -= 0.3;
                     hittimer = 0;
+                    this.y_vel = -1 * this.y_vel;
                 }
             }
 
@@ -328,6 +331,7 @@ namespace LUCiD
                 {
                     this.health -= 0.3;
                     hittimer = 0;
+                    this.y_vel = -1 * this.y_vel;
                 }
             }
 
