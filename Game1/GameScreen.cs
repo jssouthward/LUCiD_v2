@@ -21,9 +21,11 @@ namespace LUCiD
         Controls controls;
         //Camera camera;
         Moving movingTemp; // generic moving monster used for filling the list
+        Jumping jumpingTemp;
         //Warp stageEnd;
         List<Block> blocks;
         List<Moving> movingList = new List<Moving>();
+        List<Jumping> jumpingList = new List<Jumping>();
         List<Moving> temp = new List<Moving>(); //temporary moving monster list
         Stationary stationaryTemp;
         List<Stationary> stationaryList = new List<Stationary>();
@@ -123,6 +125,13 @@ namespace LUCiD
             }
             movingList.RemoveAll(moving => moving.dead == true);
 
+            foreach (Jumping jumping in jumpingList)
+            {
+                jumping.testblocks = blocks;
+                jumping.Update(controls, gameTime);
+            }
+            jumpingList.RemoveAll(jumping => jumping.dead == true);
+
             foreach (Stationary stationary in stationaryList)
             {
                 stationary.testblocks = blocks;
@@ -159,6 +168,14 @@ namespace LUCiD
                 if (moving.dead == false)
                 {
                     moving.Draw(spriteBatch);
+                }
+            }
+
+            foreach (Jumping jumping in jumpingList)
+            {
+                if (jumping.dead == false)
+                {
+                    jumping.Draw(spriteBatch);
                 }
             }
 
@@ -334,6 +351,12 @@ namespace LUCiD
                         movingTemp = new Moving(20 * j, 20 * i, 40, 40);
                         movingTemp.LoadContent(game.Content);
                         movingList.Add(movingTemp);
+                    }
+                    if (level[i, j].Equals("J"))
+                    {
+                        jumpingTemp = new Jumping(20 * j, 20 * i, 40, 40);
+                        jumpingTemp.LoadContent(game.Content);
+                        jumpingList.Add(jumpingTemp);
                     }
                     if (level[i, j].Equals("m"))
                     {
