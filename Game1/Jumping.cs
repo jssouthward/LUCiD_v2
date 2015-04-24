@@ -77,7 +77,7 @@ namespace LUCiD
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("monster");
+            image = content.Load<Texture2D>("jumping");
         }
 
         public void Draw(SpriteBatch sb)

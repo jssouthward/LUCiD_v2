@@ -111,3 +111,5 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\OpenTK.dll
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Tao.Sdl.dll
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\obj\x86\Debug\LUCiD.csprojResolveAssemblyReference.cache
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\jumping.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\stationary.png

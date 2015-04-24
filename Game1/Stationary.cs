@@ -76,7 +76,7 @@ namespace LUCiD
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("monster");
+            image = content.Load<Texture2D>("stationary");
         }
 
         public void Draw(SpriteBatch sb)
@@ -111,24 +111,23 @@ namespace LUCiD
             //movedX = Convert.ToInt32(x_vel);
             //spriteX += movedX;
 
-            //// Gravity
-            ////TODO got rid of grounded
-            //if (!grounded)
-            //{
-            //    y_vel += gravity;
-            //    if (y_vel > maxFallSpeed)
-            //        y_vel = maxFallSpeed;
-            //    spriteY += Convert.ToInt32(y_vel);
-            //}
-            //else
-            //{
-            //    y_vel = 1;
-            //}
 
-            //grounded = false;
+            if (!grounded)
+            {
+               y_vel += gravity;
+                if (y_vel > maxFallSpeed)
+                   y_vel = maxFallSpeed;
+                spriteY += Convert.ToInt32(y_vel);
+            }
+            else
+            {
+                y_vel = 1;
+            }
+
+            grounded = false;
 
             //// Check up/down collisions, then left/right
-            //checkCollisions();
+            checkCollisions();
 
         }
 
