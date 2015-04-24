@@ -88,6 +88,7 @@ namespace LUCiD
             player1.testblocks = blocks;
             player1.powerTest = powerList;
             player1.movingTest = movingList;
+            player1.jumpingTest = jumpingList;
             player1.stationaryTest = stationaryList;
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
@@ -114,6 +115,7 @@ namespace LUCiD
             {
                 lucid.movings = this.movingList;
                 lucid.stationaries = this.stationaryList;
+                lucid.jumpings = this.jumpingList;
                 lucid.Update(controls, gameTime);
             }
             shotList.RemoveAll(lucid => lucid.spent == true);

@@ -31,6 +31,7 @@ namespace LUCiD
         public List<Powerup> powerTest;
         public List<Moving> movingTest;
         public List<Stationary> stationaryTest;
+        public List<Jumping> jumpingTest;
         public List<Warp> warpTest;
         public List<Lucidity> shotTest = new List<Lucidity>();
         public int currDirection = 1;
@@ -180,6 +181,17 @@ namespace LUCiD
                 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && moving.dead == false)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (Jumping jumping in jumpingTest)
+            {
+                Rectangle currPower = new Rectangle(jumping.getX(), jumping.getY(), jumping.getSpriteWidth(), jumping.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty && jumping.dead == false)
                 {
                     this.health -= 0.3;
                 }

@@ -29,6 +29,7 @@ namespace LUCiD
         private int jumpPoint = 0;
         public List<Moving> movings;
         public List<Stationary> stationaries;
+        public List<Jumping> jumpings;
         public int direction;
         public bool spent = false;
 
@@ -113,6 +114,20 @@ namespace LUCiD
                 if (!rect.IsEmpty && !this.spent)
                 {
                     moving.dead = true;
+                    this.spent = true;
+                    break;
+                }
+            }
+
+            foreach (Jumping jumping in jumpings)
+            {
+                Rectangle currMonster = new Rectangle(jumping.getX(), jumping.getY(), jumping.getSpriteWidth(), jumping.getSpriteHeight());
+                Rectangle lucidBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
+
+                Rectangle rect = Rectangle.Intersect(lucidBox, currMonster);
+                if (!rect.IsEmpty && !this.spent)
+                {
+                    jumping.dead = true;
                     this.spent = true;
                     break;
                 }
