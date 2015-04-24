@@ -90,8 +90,10 @@ namespace LUCiD
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
 
-            darkX = player1.getX() - 134; //150-16 offset for player
-            darkY = player1.getY() - 118; //150-32
+            //darkX = player1.getX() - 134; //150-16 offset for player
+            //darkY = player1.getY() - 118; //150-32
+            darkX = player1.getX() - 120;
+            darkY = player1.getY() - 120;
 
             if (player1.health <= 0)
             {
@@ -229,11 +231,11 @@ namespace LUCiD
                 var pos2 = new Rectangle(shot.getX() - 40, shot.getY() - 40, 100, 100);
                 spriteBatch.Draw(lightmask, pos2, Color.White);
             }
-            if (player1.lucidity >= 0 && player1.lucidity < 20)
+            if (player1.lucidity <= 5)
             {
-                spriteBatch.Draw(lightmask, new Rectangle(darkX, darkY, 0, 0), Color.White);
+                //spriteBatch.Draw(lightmask, new Rectangle(darkX, darkY, 0, 0), Color.White);
             }
-            else if (player1.lucidity >= 20 && player1.lucidity < 40)
+            else if (player1.lucidity > 5 && player1.lucidity < 40)
             {
                 spriteBatch.Draw(lightmask, new Rectangle(darkX + 75, darkY + 75, 150, 150), Color.White);
             }
