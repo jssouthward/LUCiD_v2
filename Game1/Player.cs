@@ -50,8 +50,8 @@ namespace LUCiD
         // total number of frames in our spritesheet
         const int totalFrames = 3;
         // define the size of our animation frame
-        int frameHeight = 128;
-        int frameWidth = 85;
+        int frameHeight = 64;
+        int frameWidth = 28;
         Rectangle source;
 
         public Player(int x, int y, int width, int height)
