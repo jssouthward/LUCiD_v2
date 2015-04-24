@@ -137,6 +137,7 @@ namespace LUCiD
             foreach (Moving moving in movingList)
             {
                 moving.testblocks = blocks;
+                moving.testthick = thickblocks;
                 moving.Update(controls, gameTime);
             }
             movingList.RemoveAll(moving => moving.dead == true);
@@ -144,6 +145,7 @@ namespace LUCiD
             foreach (Jumping jumping in jumpingList)
             {
                 jumping.testblocks = blocks;
+                jumping.testthick = thickblocks;
                 jumping.Update(controls, gameTime);
             }
             jumpingList.RemoveAll(jumping => jumping.dead == true);
@@ -151,6 +153,7 @@ namespace LUCiD
             foreach (Stationary stationary in stationaryList)
             {
                 stationary.testblocks = blocks;
+                stationary.testthick = thickblocks;
                 stationary.Update(controls, gameTime);
             }
             stationaryList.RemoveAll(stationary => stationary.dead == true);

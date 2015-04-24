@@ -28,6 +28,7 @@ namespace LUCiD
         public double gravity = .5;
         public int maxFallSpeed = 10;
         public List<Block> testblocks;
+        public List<ThickBlock> testthick;
         public bool dead = false;
 
         public Stationary(int x, int y, int width, int height)
@@ -141,6 +142,44 @@ namespace LUCiD
             */
 
             foreach (Block block in testblocks)
+            {
+                Rectangle currBlock = new Rectangle(block.getX(), block.getY(), block.getSpriteWidth(), block.getSpriteHeight());
+                Rectangle playerBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
+
+                Rectangle rect = Rectangle.Intersect(playerBox, currBlock);
+                if (!rect.IsEmpty && rect.Width > rect.Height && this.spriteY < rect.Y)
+                {
+                    grounded = true;
+                }
+
+                if (rect.Height > rect.Width && this.spriteX < rect.X)
+                {
+                    // side collision with player on the left
+                    this.spriteX -= rect.Width;
+                    x_vel = 0;
+                }
+                if (rect.Height > rect.Width && this.spriteX + 1 > rect.X)
+                {
+                    //side collision with player on the right
+                    this.spriteX += rect.Width;
+                    x_vel = 0;
+                    //Console.WriteLine("collision");
+                }
+                if (rect.Height < rect.Width && this.spriteY < rect.Y)
+                {
+                    // floor collision
+                    this.spriteY -= rect.Height;
+                    y_vel = 0;
+                }
+                if (rect.Height < rect.Width && this.spriteY + 1 > rect.Y)
+                {
+                    // cieling collision
+                    this.spriteY += rect.Height;
+                    y_vel = 0;
+                }
+            }
+
+            foreach (ThickBlock block in testthick)
             {
                 Rectangle currBlock = new Rectangle(block.getX(), block.getY(), block.getSpriteWidth(), block.getSpriteHeight());
                 Rectangle playerBox = new Rectangle(this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
