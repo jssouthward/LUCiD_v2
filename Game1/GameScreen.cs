@@ -88,7 +88,7 @@ namespace LUCiD
             player1.testblocks = blocks;
             player1.powerTest = powerList;
             player1.movingTest = movingList;
-            player1.jumpingTest = jumpingList;
+            //player1.jumpingTest = jumpingList;
             player1.stationaryTest = stationaryList;
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
