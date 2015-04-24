@@ -50,6 +50,11 @@
     <Compile Include="Powerup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spike.cs" />
+    <Compile Include="SpikeB.cs" />
+    <Compile Include="SpikeL.cs" />
+    <Compile Include="SpikeR.cs" />
+    <Compile Include="SpikeT.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="StartScreen.cs" />
     <Compile Include="Stationary.cs" />
@@ -89,7 +94,6 @@
     <Content Include="Content\darkwoods.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\DST-Arch-Delerium_wav.wav" />
     <Content Include="Content\dude.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -124,6 +128,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\next.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spikeB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spikeL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spikeR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spikeT.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\start.png">

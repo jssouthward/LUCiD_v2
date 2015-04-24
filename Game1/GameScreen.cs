@@ -19,24 +19,27 @@ namespace LUCiD
         SpriteBatch spriteBatch;
         Player player1;
         Controls controls;
-        //Camera camera;
         Moving movingTemp; // generic moving monster used for filling the list
         Jumping jumpingTemp;
-        //Warp stageEnd;
+        Stationary stationaryTemp;
+        SpikeR spikeRTemp;
+        SpikeL spikeLTemp;
+        SpikeB spikeBTemp;
+        SpikeT spikeTTemp;
         List<Block> blocks;
         List<Moving> movingList = new List<Moving>();
         List<Jumping> jumpingList = new List<Jumping>();
-        List<Moving> temp = new List<Moving>(); //temporary moving monster list
-        Stationary stationaryTemp;
         List<Stationary> stationaryList = new List<Stationary>();
-        List<Stationary> temp2 = new List<Stationary>(); //temporary stationary monster list
+        List<SpikeR> spikeRList = new List<SpikeR>();
+        List<SpikeL> spikeLList = new List<SpikeL>();
+        List<SpikeB> spikeBList = new List<SpikeB>();
+        List<SpikeT> spikeTList = new List<SpikeT>();
         List<Powerup> powerList = new List<Powerup>();
         List<Lucidity> shotList = new List<Lucidity>();
         List<Warp> warpList = new List<Warp>();
         Powerup powerTemp;
         Warp warpTemp;
         string[,] level;
-        string[,] reset;
         Dictionary<string, string> key = new Dictionary<string, string>();
         int darkX;
         int darkY;
@@ -54,8 +57,7 @@ namespace LUCiD
             this.spriteBatch = spriteBatch;
             loadLevel(name);
             controls = new Controls();
-            timer = new Timer();  
-            //camera = new Camera(game.GraphicsDevice.Viewport);
+            timer = new Timer();
             player1.LoadContent(game.Content);
             darkness = game.Content.Load<Texture2D>("darkness");
             lightmask = game.Content.Load<Texture2D>("lightmask");
@@ -84,12 +86,15 @@ namespace LUCiD
                 timer.checkTime(game, gameTime);
             }
             controls.Update();
-            //camera.Update(gameTime, player1);
             player1.testblocks = blocks;
             player1.powerTest = powerList;
             player1.movingTest = movingList;
-            //player1.jumpingTest = jumpingList;
+            player1.jumpingTest = jumpingList;
             player1.stationaryTest = stationaryList;
+            player1.spikeRTest = spikeRList;
+            player1.spikeLTest = spikeLList;
+            player1.spikeBTest = spikeBList;
+            player1.spikeTTest = spikeTList;
             player1.warpTest = warpList;
             player1.Update(controls, gameTime);
 
@@ -160,7 +165,6 @@ namespace LUCiD
             game.GraphicsDevice.SetRenderTarget(mainScene);
             //game.GraphicsDevice.Clear(Color.Black);
 
-            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
@@ -192,6 +196,26 @@ namespace LUCiD
                 {
                     stationary.Draw(spriteBatch);
                 }
+            }
+
+            foreach (SpikeR spikeR in spikeRList)
+            {
+                spikeR.Draw(spriteBatch);
+            }
+
+            foreach (SpikeL spikeL in spikeLList)
+            {
+                spikeL.Draw(spriteBatch);
+            }
+
+            foreach (SpikeB spikeB in spikeBList)
+            {
+                spikeB.Draw(spriteBatch);
+            }
+
+            foreach (SpikeT spikeT in spikeTList)
+            {
+                spikeT.Draw(spriteBatch);
             }
 
             foreach (Lucidity shot in shotList)
@@ -365,11 +389,35 @@ namespace LUCiD
                         jumpingTemp.LoadContent(game.Content);
                         jumpingList.Add(jumpingTemp);
                     }
-                    if (level[i, j].Equals("m"))
+                    if (level[i, j].Equals("S"))
                     {
                         stationaryTemp = new Stationary(25 * j, 25 * i, 40, 40);
                         stationaryTemp.LoadContent(game.Content);
                         stationaryList.Add(stationaryTemp);
+                    }
+                    if (level[i, j].Equals("R"))
+                    {
+                        spikeRTemp = new SpikeR(25 * j, 25 * i, 25, 25);
+                        spikeRTemp.LoadContent(game.Content);
+                        spikeRList.Add(spikeRTemp);
+                    }
+                    if (level[i, j].Equals("L"))
+                    {
+                        spikeLTemp = new SpikeL(25 * j, 25 * i, 25, 25);
+                        spikeLTemp.LoadContent(game.Content);
+                        spikeLList.Add(spikeLTemp);
+                    }
+                    if (level[i, j].Equals("B"))
+                    {
+                        spikeBTemp = new SpikeB(25 * j, 25 * i, 25, 25);
+                        spikeBTemp.LoadContent(game.Content);
+                        spikeBList.Add(spikeBTemp);
+                    }
+                    if (level[i, j].Equals("T"))
+                    {
+                        spikeTTemp = new SpikeT(25 * j, 25 * i, 25, 25);
+                        spikeTTemp.LoadContent(game.Content);
+                        spikeTList.Add(spikeTTemp);
                     }
                     if (level[i, j].Equals("U"))
                     {

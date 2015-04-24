@@ -31,6 +31,11 @@ namespace LUCiD
         public List<Powerup> powerTest;
         public List<Moving> movingTest;
         public List<Stationary> stationaryTest;
+        public List<Jumping> jumpingTest;
+        public List<SpikeR> spikeRTest;
+        public List<SpikeL> spikeLTest;
+        public List<SpikeB> spikeBTest;
+        public List<SpikeT> spikeTTest;
         public List<Warp> warpTest;
         public List<Lucidity> shotTest = new List<Lucidity>();
         public int currDirection = 1;
@@ -215,12 +220,12 @@ namespace LUCiD
             foreach (Powerup power in powerTest)
             {
                 Rectangle currPower = new Rectangle(power.getX(), power.getY(), power.getSpriteWidth(), power.getSpriteHeight());
-
+                
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && power.collected == false)
                 {
                     power.collected = true;
-                    if (this.lucidity < 100)
+                    if(this.lucidity < 100)
                     {
                         this.lucidity += 20;
                     }
@@ -230,7 +235,7 @@ namespace LUCiD
             foreach (Warp warp in warpTest)
             {
                 Rectangle currPower = new Rectangle(warp.getX(), warp.getY(), warp.getSpriteWidth(), warp.getSpriteHeight());
-
+                
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && (warp.getX() - warp.getSpriteWidth() / 2 + this.spriteWidth + 2) <= this.spriteX && this.spriteX <= warp.getX() + (warp.getSpriteWidth()) / 2 - this.spriteWidth / 2 + 10)
                 {
@@ -241,9 +246,20 @@ namespace LUCiD
             foreach (Moving moving in movingTest)
             {
                 Rectangle currPower = new Rectangle(moving.getX(), moving.getY(), moving.getSpriteWidth(), moving.getSpriteHeight());
-
+                
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && moving.dead == false)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (Jumping jumping in jumpingTest)
+            {
+                Rectangle currPower = new Rectangle(jumping.getX(), jumping.getY(), jumping.getSpriteWidth(), jumping.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty && jumping.dead == false)
                 {
                     this.health -= 0.3;
                 }
@@ -255,6 +271,50 @@ namespace LUCiD
 
                 Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
                 if (!rectPower.IsEmpty && stationary.dead == false)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (SpikeR spikeR in spikeRTest)
+            {
+                Rectangle currPower = new Rectangle(spikeR.getX(), spikeR.getY(), spikeR.getSpriteWidth(), spikeR.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (SpikeL spikeL in spikeLTest)
+            {
+                Rectangle currPower = new Rectangle(spikeL.getX(), spikeL.getY(), spikeL.getSpriteWidth(), spikeL.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (SpikeB spikeB in spikeBTest)
+            {
+                Rectangle currPower = new Rectangle(spikeB.getX(), spikeB.getY(), spikeB.getSpriteWidth(), spikeB.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty)
+                {
+                    this.health -= 0.3;
+                }
+            }
+
+            foreach (SpikeT spikeT in spikeTTest)
+            {
+                Rectangle currPower = new Rectangle(spikeT.getX(), spikeT.getY(), spikeT.getSpriteWidth(), spikeT.getSpriteHeight());
+
+                Rectangle rectPower = Rectangle.Intersect(playerBox, currPower);
+                if (!rectPower.IsEmpty)
                 {
                     this.health -= 0.3;
                 }
@@ -291,7 +351,7 @@ namespace LUCiD
                 }
                 if (rect.Height < rect.Width && this.spriteY + 1 > rect.Y)
                 {
-                    // cieling collision
+                    // ceiling collision
                     this.spriteY += rect.Height + 1;
                     y_vel = 0;
                 }
@@ -303,7 +363,7 @@ namespace LUCiD
             // Jump on button press
             if (controls.onPress(Keys.Space, Buttons.A) && grounded)
             {
-                y_vel = -13;
+                y_vel = -10;
                 jumpPoint = (int)(gameTime.TotalGameTime.TotalMilliseconds);
                 grounded = false;
             }
