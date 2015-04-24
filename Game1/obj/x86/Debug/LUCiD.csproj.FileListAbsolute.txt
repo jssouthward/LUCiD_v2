@@ -164,3 +164,4 @@ C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\spikeR.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\spikeT.png
 C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\warpmask.png
+C:\Users\Joshua\Documents\Visual Studio 2013\Projects\LUCiD\Game1\bin\WindowsGL\Debug\Content\thickblock.png

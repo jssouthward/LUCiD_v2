@@ -105,22 +105,22 @@ namespace LUCiD
         {
             if (!moved && (currDirection == 1))
             {
-                sb.Draw(image, new Rectangle(spriteX, spriteY, frameWidth, frameHeight), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
+                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), new Rectangle(0, 0, frameWidth, frameHeight), Color.White,
                 0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
             }
             else if (!moved && (currDirection == -1))
             {
-                sb.Draw(image, new Rectangle(spriteX, spriteY, frameWidth, frameHeight), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
+                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), new Rectangle(frameWidth * 3, frameHeight, frameWidth, frameHeight), Color.White,
                 0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
             }
             else if (moved && (currDirection == 1))
             {
-                sb.Draw(image, new Rectangle(spriteX, spriteY, frameWidth, frameHeight), source, Color.White,
+                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), source, Color.White,
                 0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
             }
             else if (moved && (currDirection == -1))
             {
-                sb.Draw(image, new Rectangle(spriteX, spriteY, frameWidth, frameHeight), source, Color.White,
+                sb.Draw(image, new Rectangle(spriteX, spriteY+40, 50, 50), source, Color.White,
                 0.0f, new Vector2(frameWidth / 2.0f, frameHeight), SpriteEffects.None, 0.0f);
             }
         }
